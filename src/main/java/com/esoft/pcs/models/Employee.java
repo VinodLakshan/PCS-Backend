@@ -11,7 +11,11 @@ public class Employee {
 
     private String name;
 
-    @ManyToOne
+    private String userName;
+
+    private String password;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     private Role role;
 
     @ManyToOne
@@ -31,6 +35,22 @@ public class Employee {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Role getRole() {
