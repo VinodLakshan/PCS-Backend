@@ -1,12 +1,9 @@
 package com.esoft.pcs.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-public class User {
+public class Employee {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -14,7 +11,11 @@ public class User {
 
     private String name;
 
-    private String email;
+    @ManyToOne
+    private Role role;
+
+    @ManyToOne
+    private Branch branch;
 
     public Integer getId() {
         return id;
@@ -32,11 +33,19 @@ public class User {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public Role getRole() {
+        return role;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Branch getBranch() {
+        return branch;
+    }
+
+    public void setBranch(Branch branch) {
+        this.branch = branch;
     }
 }
