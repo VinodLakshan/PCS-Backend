@@ -1,16 +1,16 @@
 package com.esoft.pcs.dto;
 
-public class UserInputDto {
+public class FarmerInputDto {
     private Integer id;
 
     private String name;
 
     private String email;
 
-    public UserInputDto() {
+    public FarmerInputDto() {
     }
 
-    public UserInputDto(Integer id, String name, String email) {
+    public FarmerInputDto(Integer id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
