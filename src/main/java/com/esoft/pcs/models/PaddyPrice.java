@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class PaddyPrice {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
     private String date;
@@ -22,28 +22,28 @@ public class PaddyPrice {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getDate() {
         return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public Double getBuyingPrice() {
         return buyingPrice;
     }
 
-    public void setBuyingPrice(Double buyingPrice) {
-        this.buyingPrice = buyingPrice;
-    }
-
     public Double getSellingPrice() {
         return sellingPrice;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setBuyingPrice(Double buyingPrice) {
+        this.buyingPrice = buyingPrice;
     }
 
     public void setSellingPrice(Double sellingPrice) {
