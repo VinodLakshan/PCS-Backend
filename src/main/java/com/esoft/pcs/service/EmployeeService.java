@@ -6,15 +6,15 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    Employee createEmployee(Employee employee);
+    Employee createEmployee(Employee employeeDto) throws Exception;
 
     List<Employee> getAllEmployees();
 
     Employee getEmployeeByUserName(String userName);
 
-    boolean deleteEmployee(Employee employee);
+    boolean deleteEmployee(Employee employeeDto);
 
-    boolean isUseNameAlreadyExist(String userName);
+    boolean isUserNameAlreadyExist(String userName);
 
-    Employee updateEmployee(Employee employee);
+    Employee updateEmployee(Employee employeeDto);
 }

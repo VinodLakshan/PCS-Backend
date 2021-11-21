@@ -1,32 +1,41 @@
 package com.esoft.pcs.service.impl;
 
+import com.esoft.pcs.dto.AuthEmployeeDto;
 import com.esoft.pcs.models.Employee;
 import com.esoft.pcs.repository.EmployeeRepository;
 import com.esoft.pcs.service.EmployeeService;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
+@Slf4j
 @Service
 public class EmployeeServiceImpl implements EmployeeService, UserDetailsService {
 
     private final EmployeeRepository employeeRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, PasswordEncoder passwordEncoder) {
         this.employeeRepository = employeeRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public Employee createEmployee(Employee employee) {
-        return employeeRepository.save(employee);
+    public Employee createEmployee(Employee employee) throws Exception {
+
+        if (!employeeRepository.existsByUserName(employee.getUserName())) {
+            employee.setPassword(passwordEncoder.encode(employee.getPassword()));
+            return employeeRepository.save(employee);
+
+        } else {
+            throw new Exception("Username is already taken");
+        }
+
     }
 
     @Override
@@ -46,10 +55,8 @@ public class EmployeeServiceImpl implements EmployeeService, UserDetailsService 
     }
 
     @Override
-    public boolean isUseNameAlreadyExist(String userName) {
-
-        Employee emp = employeeRepository.findByUserName(userName);
-        return emp != null;
+    public boolean isUserNameAlreadyExist(String userName) {
+        return employeeRepository.existsByUserName(userName);
     }
 
     @Override
@@ -60,10 +67,12 @@ public class EmployeeServiceImpl implements EmployeeService, UserDetailsService 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         Employee employee = this.getEmployeeByUserName(userName);
-        if (employee == null) throw new UsernameNotFoundException("User not Found.");
-        Collection<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(employee.getRole().getRoleName()));
+        if (employee == null) {
+            log.error("Employee not found");
+            throw new UsernameNotFoundException("Employee not Found.");
+        }
+        log.info("Employee Found");
 
-        return new User(employee.getUserName(), employee.getPassword(), authorities);
+        return new AuthEmployeeDto(employee);
     }
 }
