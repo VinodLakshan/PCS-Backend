@@ -48,9 +48,9 @@ public class EmployeeController {
 
     @GetMapping
     @PreAuthorize("hasAuthority('Admin')")
-    public List<Employee> getAllEmployees(){
+    public ResponseEntity<?> getAllEmployees(){
         log.info("Retrieving all employees");
-        return employeeService.getAllEmployees();
+        return new ResponseEntity<>(employeeService.getAllEmployees(), HttpStatus.OK);
     }
 
 }
