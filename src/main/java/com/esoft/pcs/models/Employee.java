@@ -1,0 +1,86 @@
+package com.esoft.pcs.models;
+
+import javax.persistence.*;
+
+@Entity
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = "userName")
+})
+public class Employee {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Integer id;
+
+    private String name;
+
+    private String userName;
+
+    private String password;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Role role;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Branch branch;
+
+    public Employee() {
+    }
+
+    public Employee(Integer id, String name, String userName, String password, Role role, Branch branch) {
+        this.id = id;
+        this.name = name;
+        this.userName = userName;
+        this.password = password;
+        this.role = role;
+        this.branch = branch;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Branch getBranch() {
+        return branch;
+    }
+
+    public void setBranch(Branch branch) {
+        this.branch = branch;
+    }
+}

@@ -1,20 +1,20 @@
-package com.esoft.pcs.models;
+package com.esoft.pcs.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
-public class User {
-
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+public class FarmerInputDto {
     private Integer id;
 
     private String name;
 
     private String email;
+
+    public FarmerInputDto() {
+    }
+
+    public FarmerInputDto(Integer id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
 
     public Integer getId() {
         return id;
