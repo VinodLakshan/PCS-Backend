@@ -3,9 +3,8 @@ package com.esoft.pcs.controller;
 import com.esoft.pcs.models.PaddyPrice;
 import com.esoft.pcs.service.PaddyPriceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,9 +15,17 @@ public class PaddyPriceController
     @Autowired
     private PaddyPriceService paddyPriceService;
 
+    // Arun
     @GetMapping("/TodayPaddyPriceGet")
-    public PaddyPrice TodayPaddyPriceGet(HttpServletRequest request) throws Exception
+    public ResponseEntity<PaddyPrice> TodayPaddyPriceGet(HttpServletRequest request) throws Exception
     {
         return paddyPriceService.TodayPaddyPrice();
+    }
+
+    // Arun
+    @PostMapping("/PaddyPriceSave")
+    public ResponseEntity<PaddyPrice> PaddyPriceSave(@RequestBody PaddyPrice paddyPrice, HttpServletRequest request) throws Exception
+    {
+        return paddyPriceService.PaddyPriceSave(paddyPrice);
     }
 }
