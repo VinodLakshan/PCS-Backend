@@ -3,6 +3,9 @@ package com.esoft.pcs.models;
 import javax.persistence.*;
 
 @Entity
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = "userName")
+})
 public class Employee {
 
     @Id
@@ -18,8 +21,20 @@ public class Employee {
     @ManyToOne(fetch = FetchType.EAGER)
     private Role role;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Branch branch;
+
+    public Employee() {
+    }
+
+    public Employee(Integer id, String name, String userName, String password, Role role, Branch branch) {
+        this.id = id;
+        this.name = name;
+        this.userName = userName;
+        this.password = password;
+        this.role = role;
+        this.branch = branch;
+    }
 
     public Integer getId() {
         return id;
