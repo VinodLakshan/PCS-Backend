@@ -26,6 +26,7 @@ public class EmployeeController {
     @PostMapping("/login")
     public ResponseEntity<?> employeeLogin(@RequestBody Employee employee){
         log.info("Employee is logging in");
+        System.out.println(jwtUtil.authenticate(employee).getToken());
         return new ResponseEntity<>(jwtUtil.authenticate(employee), HttpStatus.OK);
     }
 
