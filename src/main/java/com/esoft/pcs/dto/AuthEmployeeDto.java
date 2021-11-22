@@ -41,10 +41,7 @@ public class AuthEmployeeDto implements UserDetails {
         return employee.getBranch();
     }
 
-    public Role getRole() {
-        Role role = employee.getRole();
-        return role;
-    }
+    public Role getRole() { return employee.getRole(); }
 
     @Override
     public String getPassword() {
