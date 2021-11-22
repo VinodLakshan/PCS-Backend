@@ -12,9 +12,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-#    show-sql: 'true'
+    defer-datasource-initialization: true
+    #    show-sql: 'true'
   sql:
     init:
       mode: always
+
 
 
