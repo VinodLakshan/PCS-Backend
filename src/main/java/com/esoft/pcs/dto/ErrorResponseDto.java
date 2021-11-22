@@ -12,4 +12,16 @@ public class ErrorResponseDto {
         this.message = message;
     }
 
+    public ErrorResponseDto(HttpStatus status) {
+        this.status = status;
+        this.message = status.getReasonPhrase();
+    }
+
+    public HttpStatus getStatus() {
+        return status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
 }

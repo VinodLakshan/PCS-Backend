@@ -1,12 +1,13 @@
 package com.esoft.pcs.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class PaddyPurchase {
+public class PaddyPurchase implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
     private String date;
