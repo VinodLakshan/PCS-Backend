@@ -1,5 +1,6 @@
 package com.esoft.pcs.service.impl;
 
+import com.esoft.pcs.models.Branch;
 import com.esoft.pcs.models.Farmer;
 import com.esoft.pcs.repository.FarmerRepository;
 import com.esoft.pcs.service.FarmerService;
@@ -40,4 +41,5 @@ public class FarmerServiceImpl implements FarmerService {
     public Farmer updateFarmer(Farmer farmer) {
         return farmerRepository.save(farmer);
     }
+
 }
