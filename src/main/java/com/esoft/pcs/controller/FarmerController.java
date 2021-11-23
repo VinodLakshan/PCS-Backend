@@ -1,45 +1,50 @@
 package com.esoft.pcs.controller;
 
+import com.esoft.pcs.dto.ResponseDto;
+import com.esoft.pcs.models.Branch;
 import com.esoft.pcs.models.Farmer;
 import com.esoft.pcs.service.FarmerService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path="/farmer")
+@Slf4j
 public class FarmerController {
 
     @Autowired
     private FarmerService farmerService;
 
     @PostMapping
-    public @ResponseBody
-    Farmer createNewFarmer (@RequestBody Farmer farmerInputDto) {
-        return farmerService.createFarmer(farmerInputDto);
+    public ResponseEntity<?> createNewFarmer (@RequestBody Farmer farmer) {
+        return new ResponseEntity<>(new ResponseDto(farmerService.createFarmer(farmer), HttpStatus.OK), HttpStatus.OK);
     }
 
     @GetMapping
-    public @ResponseBody List<Farmer> getAllFarmers() {
-        return farmerService.getAllFarmers();
+    public ResponseEntity<?> getAllFarmers() {
+        log.info("Retrieving all farmers");
+        return new ResponseEntity<>(new ResponseDto(farmerService.getAllFarmers(), HttpStatus.OK), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public @ResponseBody
-    Farmer getFarmerById(@PathVariable(value = "id") Integer userId) throws Exception{
-        return farmerService.getFarmerById(userId);
+    public ResponseEntity<?> getFarmerById(@PathVariable Integer id) throws Exception {
+        return new ResponseEntity<>(new ResponseDto(farmerService.getFarmerById(id), HttpStatus.OK), HttpStatus.OK);
     }
 
     @PutMapping
-    public @ResponseBody
-    Farmer updateFarmer (@RequestBody Farmer farmerInputDto) {
-        return farmerService.updateFarmer(farmerInputDto);
+    public ResponseEntity<?> updateFarmer (@RequestBody Farmer farmer) {
+        return new ResponseEntity<>(new ResponseDto(farmerService.updateFarmer(farmer), HttpStatus.OK), HttpStatus.OK);
     }
 
     @DeleteMapping
-    public @ResponseBody boolean deleteFarmer (@RequestBody Farmer farmerInputDto) {
-        return farmerService.deleteFarmer(farmerInputDto);
+    public ResponseEntity<?> deleteFarmer (@RequestBody Farmer farmer) {
+        return new ResponseEntity<>(new ResponseDto(farmerService.deleteFarmer(farmer), HttpStatus.OK), HttpStatus.OK);
     }
 
 
