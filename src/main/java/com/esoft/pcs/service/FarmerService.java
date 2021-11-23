@@ -1,5 +1,6 @@
 package com.esoft.pcs.service;
 
+import com.esoft.pcs.models.Branch;
 import com.esoft.pcs.models.Farmer;
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface FarmerService {
     boolean deleteFarmer(Farmer farmer);
 
     Farmer updateFarmer(Farmer farmer);
+
 }
