@@ -1,10 +1,13 @@
 package com.esoft.pcs.models;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@DynamicUpdate
 public class Branch implements Serializable {
 
     @Id
@@ -34,6 +37,13 @@ public class Branch implements Serializable {
 
     @OneToMany
     private List<BranchOrder> branchOrderList;
+
+    public Branch() {
+    }
+
+    public Branch(Integer id) {
+        this.id = id;
+    }
 
     public Integer getId() {
         return id;
