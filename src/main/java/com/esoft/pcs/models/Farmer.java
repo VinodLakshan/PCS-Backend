@@ -1,10 +1,14 @@
 package com.esoft.pcs.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@DynamicUpdate
 public class Farmer implements Serializable {
 
     @Id
@@ -15,10 +19,17 @@ public class Farmer implements Serializable {
 
     private String registrationNumber;
 
-    private Double totalMonthlyPaddyAmount;
+    private Double totalMonthlyPaddyAmount = 0.0;
 
     @OneToMany
     private List<PaddyPurchase> paddyPurchaseList;
+
+    public Farmer() {
+    }
+
+    public Farmer(Integer id) {
+        this.id = id;
+    }
 
     public Integer getId() {
         return id;
