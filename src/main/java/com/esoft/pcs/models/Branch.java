@@ -1,13 +1,14 @@
 package com.esoft.pcs.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Branch {
+public class Branch implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
     private String address;
@@ -22,7 +23,7 @@ public class Branch {
 
     private Double totalMonthlyPaddyLimitPerFarmer;
 
-    @OneToMany
+    @OneToMany()
     private List<Employee> employeeList;
 
     @OneToMany

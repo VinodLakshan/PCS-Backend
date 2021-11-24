@@ -1,6 +1,7 @@
 package com.esoft.pcs.controller;
 
 import com.esoft.pcs.dto.ErrorResponseDto;
+import com.esoft.pcs.exception.UsernameAlreadyExistException;
 import com.esoft.pcs.models.Employee;
 import com.esoft.pcs.service.EmployeeService;
 import com.esoft.pcs.util.JwtUtil;
@@ -24,31 +25,47 @@ public class EmployeeController {
     private JwtUtil jwtUtil;
 
     @PostMapping("/login")
-    public ResponseEntity<?> employeeLogin(@RequestBody Employee employee){
+    public ResponseEntity<?> employeeLogin(@RequestBody Employee employee) {
         log.info("Employee is logging in");
-        System.out.println(jwtUtil.authenticate(employee).getToken());
         return new ResponseEntity<>(jwtUtil.authenticate(employee), HttpStatus.OK);
     }
 
     @PostMapping("/register")
-    @PreAuthorize("hasAuthority('Admin')")
-    public ResponseEntity<?> registerEmployee(Employee employee){
+    public ResponseEntity<?> registerEmployee(@RequestBody Employee employee) {
 
         log.info("Employee is being registered");
         try {
             Employee createdEmployee = employeeService.createEmployee(employee);
-            return new ResponseEntity<>(jwtUtil.authenticate(createdEmployee), HttpStatus.OK);
+            if (createdEmployee != null) {
+                log.info("Employee registered");
+                return new ResponseEntity<>(jwtUtil.authenticate(employee), HttpStatus.OK);
 
-        } catch (Exception e) {
-            
+            } else {
+                log.error("Employee registration failed");
+                return new ResponseEntity<>(new ErrorResponseDto(HttpStatus.EXPECTATION_FAILED, "Employee registration failed"),
+                        HttpStatus.EXPECTATION_FAILED);
+            }
+
+        } catch (UsernameAlreadyExistException e) {
+
             log.error(e.getMessage());
             return new ResponseEntity<>(new ErrorResponseDto(HttpStatus.CONFLICT, e.getMessage()), HttpStatus.CONFLICT);
+
+        } catch (CloneNotSupportedException e) {
+            log.error(e.getMessage());
+            return new ResponseEntity<>(new ErrorResponseDto(HttpStatus.INTERNAL_SERVER_ERROR), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/{username}")
+    @PreAuthorize("hasAuthority('Admin')")
+    public ResponseEntity<?> getEmployeeByUsername(@PathVariable String username){
+        return new ResponseEntity<>(employeeService.getEmployeeByUserName(username), HttpStatus.OK);
     }
 
     @GetMapping
     @PreAuthorize("hasAuthority('Admin')")
-    public ResponseEntity<?> getAllEmployees(){
+    public ResponseEntity<?> getAllEmployees() {
         log.info("Retrieving all employees");
         return new ResponseEntity<>(employeeService.getAllEmployees(), HttpStatus.OK);
     }
