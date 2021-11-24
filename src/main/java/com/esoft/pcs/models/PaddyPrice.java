@@ -19,6 +19,13 @@ public class PaddyPrice implements Serializable {
 
     private Double sellingPrice;
 
+    public PaddyPrice() {
+    }
+
+    public PaddyPrice(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }

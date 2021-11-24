@@ -1,5 +1,7 @@
 package com.esoft.pcs.models;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +9,7 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
+@DynamicUpdate
 public class Payment implements Serializable {
 
     @Id
@@ -20,6 +23,16 @@ public class Payment implements Serializable {
     private String bank;
 
     private String status;
+
+    public Payment() {
+    }
+
+    public Payment(String date, Double amount, String bank, String status) {
+        this.date = date;
+        this.amount = amount;
+        this.bank = bank;
+        this.status = status;
+    }
 
     public Integer getId() {
         return id;

@@ -23,8 +23,20 @@ public class PaddyPurchase implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     private Branch branch;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Payment payment;
+
+    public PaddyPurchase() {
+    }
+
+    public PaddyPurchase(String date, Double weight, Farmer farmer, PaddyPrice paddyPrice, Branch branch, Payment payment) {
+        this.date = date;
+        this.weight = weight;
+        this.farmer = farmer;
+        this.paddyPrice = paddyPrice;
+        this.branch = branch;
+        this.payment = payment;
+    }
 
     public Integer getId() {
         return id;
