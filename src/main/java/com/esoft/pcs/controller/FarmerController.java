@@ -26,6 +26,11 @@ public class FarmerController {
         return new ResponseEntity<>(new ResponseDto(farmerService.createFarmer(farmer), HttpStatus.OK), HttpStatus.OK);
     }
 
+    @GetMapping("/count")
+    public ResponseEntity<?> getFarmersCount() {
+        return new ResponseEntity<>(new ResponseDto(farmerService.getCountOfFarmers(), HttpStatus.OK), HttpStatus.OK);
+    }
+
     @GetMapping
     public ResponseEntity<?> getAllFarmers() {
         log.info("Retrieving all farmers");

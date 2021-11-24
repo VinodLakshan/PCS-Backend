@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface FarmerService {
 
+    Long getCountOfFarmers();
+
     Farmer createFarmer(Farmer farmer);
 
     List<Farmer> getAllFarmers();
