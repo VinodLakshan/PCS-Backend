@@ -48,9 +48,9 @@ public class CommonController {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
-    @GetMapping("/latestPaddyPrices")
-    public ResponseEntity<?> getLatestPaddyPrices(){
-        PaddyPrice latestPaddyPrices = paddyPriceService.getLatestPaddyPrices();
-        return new ResponseEntity<>(new ResponseDto(latestPaddyPrices, HttpStatus.OK), HttpStatus.OK);
-    }
+//    @GetMapping("/latestPaddyPrices")
+//    public ResponseEntity<?> getLatestPaddyPrices(){
+//        PaddyPrice latestPaddyPrices = paddyPriceService.getLatestPaddyPrices();
+//        return new ResponseEntity<>(new ResponseDto(latestPaddyPrices, HttpStatus.OK), HttpStatus.OK);
+//    }
 }
