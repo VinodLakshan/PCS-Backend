@@ -8,7 +8,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     url: jdbc:mysql://localhost:3306/pcsdb?createDatabaseIfNotExist=true
-    password:
+    password: 9696
   jpa:
     hibernate:
       ddl-auto: update
