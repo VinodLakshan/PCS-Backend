@@ -16,6 +16,11 @@ public class FarmerServiceImpl implements FarmerService {
     private FarmerRepository farmerRepository;
 
     @Override
+    public Long getCountOfFarmers() {
+        return farmerRepository.count();
+    }
+
+    @Override
     public Farmer createFarmer(Farmer farmer) {
         return farmerRepository.save(farmer);
     }
