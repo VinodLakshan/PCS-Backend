@@ -7,20 +7,21 @@ import com.esoft.pcs.dto.ReportSellingOutputDto;
 import com.esoft.pcs.dto.ReportStockOutputDto;
 import com.esoft.pcs.models.Farmer;
 import com.esoft.pcs.service.ReportService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path="/report")
+@Slf4j
 public class ReportController {
 
-    @Autowired
     private ReportService reportService;
+
+    public ReportController(ReportService reportService){this.reportService= reportService;}
 
     @GetMapping("/stock-report")
     public @ResponseBody List<ReportStockOutputDto> getStockReport() {

@@ -52,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests()
                 .antMatchers("/employee/login", "/employee/register", "/common/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/farmer/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/farmer/**", "/branch/**").permitAll()
                 .anyRequest().authenticated();
         http.addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class);
     }

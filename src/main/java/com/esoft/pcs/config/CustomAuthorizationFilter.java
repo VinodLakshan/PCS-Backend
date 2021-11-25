@@ -32,7 +32,8 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
         if (request.getServletPath().equals("/employee/login") ||
                 request.getServletPath().equals("/employee/register") ||
                 request.getServletPath().startsWith("/common") ||
-                (request.getServletPath().startsWith("/farmer") && request.getMethod().equals("GET"))) {
+                (request.getServletPath().startsWith("/farmer") && request.getMethod().equals("GET")) ||
+                (request.getServletPath().startsWith("/branch") && request.getMethod().equals("GET"))) {
             filterChain.doFilter(request, response);
 
         } else {
@@ -50,10 +51,11 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                 } catch (Exception e) {
                     log.error(e.getMessage());
                     response.setHeader("error", e.getMessage());
-                    response.setStatus(HttpStatus.FORBIDDEN.value());
+                    response.setStatus(HttpStatus.UNAUTHORIZED.value());
                     Map<String, String> error = new HashMap<>();
+
                     error.put("error", e.getMessage());
-                    error.put("status", HttpStatus.FORBIDDEN.toString());
+                    error.put("status", HttpStatus.UNAUTHORIZED.toString());
 
                     response.setContentType(MediaType.APPLICATION_JSON_VALUE);
                     new ObjectMapper().writeValue(response.getOutputStream(), error);

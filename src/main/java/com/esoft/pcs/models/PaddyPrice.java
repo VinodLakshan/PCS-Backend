@@ -1,5 +1,7 @@
 package com.esoft.pcs.models;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +9,7 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
+@DynamicUpdate
 public class PaddyPrice implements Serializable {
 
     @Id
@@ -19,32 +22,39 @@ public class PaddyPrice implements Serializable {
 
     private Double sellingPrice;
 
-    public Integer getId() {
-        return id;
+    public PaddyPrice() {
     }
 
-    public void setId(Integer id) {
+    public PaddyPrice(Integer id) {
         this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getDate() {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     public Double getBuyingPrice() {
         return buyingPrice;
     }
 
-    public void setBuyingPrice(Double buyingPrice) {
-        this.buyingPrice = buyingPrice;
-    }
-
     public Double getSellingPrice() {
         return sellingPrice;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setBuyingPrice(Double buyingPrice) {
+        this.buyingPrice = buyingPrice;
     }
 
     public void setSellingPrice(Double sellingPrice) {

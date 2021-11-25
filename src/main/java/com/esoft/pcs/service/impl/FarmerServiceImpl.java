@@ -17,6 +17,11 @@ public class FarmerServiceImpl implements FarmerService {
 
 //  To Save a Single Farmer (Post Method)
     @Override
+    public Long getCountOfFarmers() {
+        return farmerRepository.count();
+    }
+
+    @Override
     public Farmer createFarmer(Farmer farmer) {
         return farmerRepository.save(farmer);
     }
