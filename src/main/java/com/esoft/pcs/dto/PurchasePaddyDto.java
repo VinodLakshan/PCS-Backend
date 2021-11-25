@@ -1,4 +1,4 @@
-package com.esoft.pcs.controller;
+package com.esoft.pcs.dto;
 
 public class PurchasePaddyDto {
 
