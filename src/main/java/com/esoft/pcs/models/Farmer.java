@@ -1,34 +1,24 @@
 package com.esoft.pcs.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.DynamicUpdate;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@DynamicUpdate
+@Table(name = "FARMER_TBL")
 public class Farmer implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
-
     private String name;
-
     private String registrationNumber;
-
-    private Double totalMonthlyPaddyAmount = 0.0;
+    private Double totalMonthlyPaddyAmount;
 
     @OneToMany
     private List<PaddyPurchase> paddyPurchaseList;
 
-    public Farmer() {
-    }
-
-    public Farmer(Integer id) {
-        this.id = id;
+    public Farmer(Integer farmerId) {
     }
 
     public Integer getId() {

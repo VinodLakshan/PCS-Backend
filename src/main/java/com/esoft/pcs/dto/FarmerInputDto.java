@@ -1,12 +1,10 @@
 package com.esoft.pcs.dto;
 
 public class FarmerInputDto {
+
     private Integer id;
-
     private String name;
-
     private String email;
-
     public FarmerInputDto() {
     }
 
