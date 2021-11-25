@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 
 @CrossOrigin(origins = "*")
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/paddyPrice")
 @Slf4j
 public class PaddyPriceController
