@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 
 public interface PaddyPriceService
 {
-    ResponseEntity<PaddyPrice> TodayPaddyPrice();
+    PaddyPrice TodayPaddyPrice();
 
-    ResponseEntity<PaddyPrice> PaddyPriceSave(PaddyPrice paddyPrice);
+    PaddyPrice PaddyPriceSave(PaddyPrice paddyPrice);
 }
