@@ -22,66 +22,30 @@ public class FarmerController {
     private FarmerService farmerService;
 
     @PostMapping("/addFarmer")
-    public Farmer createFarmer(@RequestBody Farmer farmer){
-        return farmerService.createFarmer(farmer);
+    public ResponseEntity<Farmer> createNewFarmer (@RequestBody Farmer farmer) {
+        return new ResponseEntity(new ResponseDto(farmerService.createFarmer(farmer), HttpStatus.OK), HttpStatus.OK);
     }
 
-    @PostMapping("/addFarmers")
-    public List<Farmer> saveFarmers(@RequestBody List<Farmer> farmers){
-        return farmerService.saveFarmers(farmers);
+    @GetMapping("/addFarmers")
+    public ResponseEntity<Farmer> getAllFarmers() {
+        log.info("Retrieving all farmers");
+        return new ResponseEntity(new ResponseDto(farmerService.getAllFarmers(), HttpStatus.OK), HttpStatus.OK);
     }
 
-    @GetMapping("/farmers")
-    public List<Farmer> findAllFarmers(){
-        return farmerService.getAllFarmers();
+    @GetMapping("/{id}")
+    public ResponseEntity<Farmer> getFarmerById(@PathVariable Integer id) throws Exception {
+        return new ResponseEntity(new ResponseDto(farmerService.getFarmerById(id), HttpStatus.OK), HttpStatus.OK);
     }
 
-    @GetMapping("/farmer/{id}")
-    public Farmer findFarmerById(@PathVariable int id) throws Exception {
-        return farmerService.getFarmerById(id);
+    @PutMapping
+    public ResponseEntity<Farmer> updateFarmer (@RequestBody Farmer farmer) {
+        return new ResponseEntity(new ResponseDto(farmerService.updateFarmer(farmer), HttpStatus.OK), HttpStatus.OK);
     }
 
-    @PutMapping("/addFarmer")
-    public Farmer updateFarmer(@RequestBody Farmer farmer){
-        return farmerService.updateFarmer(farmer);
+    @DeleteMapping
+    public ResponseEntity<Farmer> deleteFarmer (@RequestBody Farmer farmer) {
+        return new ResponseEntity(new ResponseDto(farmerService.deleteFarmer(id), HttpStatus.OK), HttpStatus.OK);
     }
-
-    @DeleteMapping("/delete/{id}")
-    public String deleteFarmer(@PathVariable int id){
-        return farmerService.deleteFarmer(id);
-    }
-
-
-
-
-
-
-
-//    @PostMapping("/addFarmer")
-//    public ResponseEntity<Farmer> createNewFarmer (@RequestBody Farmer farmer) {
-//        return new ResponseEntity(new ResponseDto(farmerService.createFarmer(farmer), HttpStatus.OK), HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/addFarmers")
-//    public ResponseEntity<Farmer> getAllFarmers() {
-//        log.info("Retrieving all farmers");
-//        return new ResponseEntity(new ResponseDto(farmerService.getAllFarmers(), HttpStatus.OK), HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/{id}")
-//    public ResponseEntity<Farmer> getFarmerById(@PathVariable Integer id) throws Exception {
-//        return new ResponseEntity(new ResponseDto(farmerService.getFarmerById(id), HttpStatus.OK), HttpStatus.OK);
-//    }
-//
-//    @PutMapping
-//    public ResponseEntity<Farmer> updateFarmer (@RequestBody Farmer farmer) {
-//        return new ResponseEntity(new ResponseDto(farmerService.updateFarmer(farmer), HttpStatus.OK), HttpStatus.OK);
-//    }
-//
-//    @DeleteMapping
-//    public ResponseEntity<Farmer> deleteFarmer (@RequestBody Farmer farmer) {
-//        return new ResponseEntity(new ResponseDto(farmerService.deleteFarmer(id), HttpStatus.OK), HttpStatus.OK);
-//    }
 
 
 }
