@@ -18,6 +18,9 @@ public class Farmer implements Serializable {
     @OneToMany
     private List<PaddyPurchase> paddyPurchaseList;
 
+    public Farmer(Integer farmerId) {
+    }
+
     public Integer getId() {
         return id;
     }

@@ -14,19 +14,19 @@ import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
-//@RequestMapping(path="/farmer")
+@RequestMapping(path="/farmer")
 @Slf4j
 public class FarmerController {
 
     @Autowired
     private FarmerService farmerService;
 
-    @PostMapping("/addFarmer")
+    @PostMapping()
     public ResponseEntity<Farmer> createNewFarmer (@RequestBody Farmer farmer) {
         return new ResponseEntity(new ResponseDto(farmerService.createFarmer(farmer), HttpStatus.OK), HttpStatus.OK);
     }
 
-    @GetMapping("/addFarmers")
+    @GetMapping()
     public ResponseEntity<Farmer> getAllFarmers() {
         log.info("Retrieving all farmers");
         return new ResponseEntity(new ResponseDto(farmerService.getAllFarmers(), HttpStatus.OK), HttpStatus.OK);
@@ -37,14 +37,14 @@ public class FarmerController {
         return new ResponseEntity(new ResponseDto(farmerService.getFarmerById(id), HttpStatus.OK), HttpStatus.OK);
     }
 
-    @PutMapping
+    @PutMapping()
     public ResponseEntity<Farmer> updateFarmer (@RequestBody Farmer farmer) {
         return new ResponseEntity(new ResponseDto(farmerService.updateFarmer(farmer), HttpStatus.OK), HttpStatus.OK);
     }
 
-    @DeleteMapping
+    @DeleteMapping()
     public ResponseEntity<Farmer> deleteFarmer (@RequestBody Farmer farmer) {
-        return new ResponseEntity(new ResponseDto(farmerService.deleteFarmer(id), HttpStatus.OK), HttpStatus.OK);
+        return new ResponseEntity(new ResponseDto(farmerService.deleteFarmer(farmer.getId()), HttpStatus.OK), HttpStatus.OK);
     }
 
 
