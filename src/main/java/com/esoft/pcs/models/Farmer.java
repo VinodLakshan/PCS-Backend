@@ -11,12 +11,18 @@ public class Farmer implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
-    private String name;
     private String registrationNumber;
-    private Double totalMonthlyPaddyAmount;
+    private String name;
+    private String address;
+    private String telephoneNumber;
+    private Double totalMonthlyPaddyAmount = 0.0;
 
     @OneToMany
     private List<PaddyPurchase> paddyPurchaseList;
+
+    public Farmer() {
+
+    }
 
     public Farmer(Integer farmerId) {
     }
@@ -59,5 +65,21 @@ public class Farmer implements Serializable {
 
     public void setPaddyPurchaseList(List<PaddyPurchase> paddyPurchaseList) {
         this.paddyPurchaseList = paddyPurchaseList;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getTelephoneNumber() {
+        return telephoneNumber;
+    }
+
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
     }
 }

@@ -4,12 +4,14 @@ import com.esoft.pcs.dto.AuthEmployeeDto;
 import com.esoft.pcs.exception.UsernameAlreadyExistException;
 import com.esoft.pcs.models.Branch;
 import com.esoft.pcs.models.Employee;
+import com.esoft.pcs.models.Farmer;
 import com.esoft.pcs.models.Role;
 import com.esoft.pcs.repository.EmployeeRepository;
 import com.esoft.pcs.service.BranchService;
 import com.esoft.pcs.service.EmployeeService;
 import com.esoft.pcs.service.RoleService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,7 +24,9 @@ import java.util.List;
 @Service
 public class EmployeeServiceImpl implements EmployeeService, UserDetailsService {
 
+    @Autowired
     private final EmployeeRepository employeeRepository;
+
     private final RoleService roleService;
     private final BranchService branchService;
     private final PasswordEncoder passwordEncoder;
@@ -56,20 +60,43 @@ public class EmployeeServiceImpl implements EmployeeService, UserDetailsService 
         return employeeRepository.findAll();
     }
 
+
     @Override
     public Employee getEmployeeByUserName(String userName) {
         return employeeRepository.findByUserName(userName);
     }
 
     @Override
-    public boolean deleteEmployee(Employee employee) {
-        employeeRepository.delete(employee);
-        return true;
+    public Employee getEmployeeById(Integer id) throws Exception {
+        return employeeRepository.findById(id).
+                orElseThrow(() -> new Exception("Employee not found for id = " + id));
+    }
+
+    @Override
+    public boolean deleteEmployee(Employee employeeDto) {
+        return false;
+    }
+
+    @Override
+    public String deleteEmployee(Integer id) {
+        employeeRepository.deleteById(id);
+        return "Employee with ID " + id + " Has Been Removed Successfully";
     }
 
     @Override
     public boolean isUserNameAlreadyExist(String userName) {
         return employeeRepository.existsByUserName(userName);
+    }
+
+    @Override
+    public Employee updateEmp(Employee employee) {
+        Employee existingEmployee = employeeRepository.findById(employee.getId()).orElse(null);
+        existingEmployee.setName(employee.getName());
+//        existingEmployee.setRegistrationNumber(employee.getRegistrationNumber());
+        existingEmployee.setEmail(employee.getEmail());
+        existingEmployee.setBranch(employee.getBranch());
+        existingEmployee.setRole(employee.getRole());
+        return employeeRepository.save(existingEmployee);
     }
 
     @Override
@@ -88,5 +115,4 @@ public class EmployeeServiceImpl implements EmployeeService, UserDetailsService 
 
         return new AuthEmployeeDto(employee);
     }
-
 }
