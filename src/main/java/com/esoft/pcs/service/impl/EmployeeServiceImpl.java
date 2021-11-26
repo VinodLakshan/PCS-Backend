@@ -2,9 +2,7 @@ package com.esoft.pcs.service.impl;
 
 import com.esoft.pcs.dto.AuthEmployeeDto;
 import com.esoft.pcs.exception.UsernameAlreadyExistException;
-import com.esoft.pcs.models.Branch;
 import com.esoft.pcs.models.Employee;
-import com.esoft.pcs.models.Role;
 import com.esoft.pcs.repository.EmployeeRepository;
 import com.esoft.pcs.service.BranchService;
 import com.esoft.pcs.service.EmployeeService;

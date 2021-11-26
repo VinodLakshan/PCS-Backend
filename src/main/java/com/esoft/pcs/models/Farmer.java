@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "FARMER_TBL")
+@Table
 public class Farmer implements Serializable {
 
     @Id
@@ -13,12 +13,17 @@ public class Farmer implements Serializable {
     private Integer id;
     private String name;
     private String registrationNumber;
-    private Double totalMonthlyPaddyAmount;
+    private Double totalMonthlyPaddyAmount = 0.0;
 
     @OneToMany
     private List<PaddyPurchase> paddyPurchaseList;
 
     public Farmer(Integer farmerId) {
+        this.id = farmerId;
+    }
+
+    public Farmer() {
+
     }
 
     public Integer getId() {
