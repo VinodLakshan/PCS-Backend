@@ -1,8 +1,11 @@
 package com.esoft.pcs.repository;
 
+import com.esoft.pcs.models.Branch;
 import com.esoft.pcs.models.PaddySale;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PaddySaleRepository extends JpaRepository<PaddySale, Integer> {
+import java.util.List;
 
+public interface PaddySaleRepository extends JpaRepository<PaddySale, Integer> {
+    List<PaddySale> findPaddySaleByBranch(Branch branch);
 }
