@@ -94,7 +94,9 @@ public class EmployeeServiceImpl implements EmployeeService, UserDetailsService 
         existingEmployee.setName(employee.getName());
 //        existingEmployee.setRegistrationNumber(employee.getRegistrationNumber());
         existingEmployee.setEmail(employee.getEmail());
+        existingEmployee.setUserId(employee.getUserId());
         existingEmployee.setBranch(employee.getBranch());
+        existingEmployee.setPassword(passwordEncoder.encode(existingEmployee.getPassword()));
         existingEmployee.setRole(employee.getRole());
         return employeeRepository.save(existingEmployee);
     }

@@ -5,6 +5,7 @@ import com.esoft.pcs.dto.ResponseDto;
 import com.esoft.pcs.exception.UsernameAlreadyExistException;
 import com.esoft.pcs.models.Employee;
 import com.esoft.pcs.models.Farmer;
+import com.esoft.pcs.models.Farmer;
 import com.esoft.pcs.service.EmployeeService;
 import com.esoft.pcs.util.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
