@@ -14,6 +14,8 @@ public class PaddySale implements Serializable {
 
     private Double weight;
 
+    private Integer status;
+
     @ManyToOne
     private PaddyPrice paddyPrice;
 
@@ -25,6 +27,21 @@ public class PaddySale implements Serializable {
 
     @OneToOne
     private Payment payment;
+
+    public PaddySale(){
+
+    }
+
+    public PaddySale(Integer id, String date, Double weight, Integer status, PaddyPrice paddyPrice, Branch branch, Customer customer, Payment payment) {
+        this.id = id;
+        this.date = date;
+        this.weight = weight;
+        this.status = status;
+        this.paddyPrice = paddyPrice;
+        this.branch = branch;
+        this.customer = customer;
+        this.payment = payment;
+    }
 
     public Integer getId() {
         return id;
@@ -80,5 +97,13 @@ public class PaddySale implements Serializable {
 
     public void setPayment(Payment payment) {
         this.payment = payment;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }
