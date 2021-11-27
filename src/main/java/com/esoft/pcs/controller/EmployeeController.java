@@ -1,8 +1,10 @@
 package com.esoft.pcs.controller;
 
 import com.esoft.pcs.dto.ErrorResponseDto;
+import com.esoft.pcs.dto.ResponseDto;
 import com.esoft.pcs.exception.UsernameAlreadyExistException;
 import com.esoft.pcs.models.Employee;
+import com.esoft.pcs.models.Farmer;
 import com.esoft.pcs.service.EmployeeService;
 import com.esoft.pcs.util.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +25,35 @@ public class EmployeeController {
 
     @Autowired
     private JwtUtil jwtUtil;
+
+//    Zaid Starting
+    @PostMapping()
+    public ResponseEntity<Employee> createNewEmployee (@RequestBody Employee employee) throws UsernameAlreadyExistException, CloneNotSupportedException {
+        return new ResponseEntity(new ResponseDto(employeeService.createEmployee(employee), HttpStatus.OK), HttpStatus.OK);
+    }
+
+    @GetMapping()
+    public ResponseEntity<Employee> getAllEmployee() {
+        log.info("Retrieving all Employees");
+        return new ResponseEntity(new ResponseDto(employeeService.getAllEmployees(), HttpStatus.OK), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable Integer id) throws Exception {
+        return new ResponseEntity(new ResponseDto(employeeService.getEmployeeById(id), HttpStatus.OK), HttpStatus.OK);
+    }
+
+    @PutMapping()
+    public ResponseEntity<Employee> updateEmployee (@RequestBody Employee employee) {
+        return new ResponseEntity(new ResponseDto(employeeService.updateEmp(employee), HttpStatus.OK), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Employee> deleteEmployee (@PathVariable Integer id) {
+        return new ResponseEntity(new ResponseDto(employeeService.deleteEmployee(id), HttpStatus.OK), HttpStatus.OK);
+    }
+
+//    Zaid End
 
     @PostMapping("/login")
     public ResponseEntity<?> employeeLogin(@RequestBody Employee employee) {
@@ -64,11 +95,12 @@ public class EmployeeController {
         return new ResponseEntity<>(employeeService.getEmployeeByUserName(username), HttpStatus.OK);
     }
 
-    @GetMapping
-    @PreAuthorize("hasAuthority('Admin')")
-    public ResponseEntity<?> getAllEmployees() {
-        log.info("Retrieving all employees");
-        return new ResponseEntity<>(employeeService.getAllEmployees(), HttpStatus.OK);
-    }
+//    @GetMapping
+//    public ResponseEntity<?> getAllEmployees() {
+//        log.info("Retrieving all employees");
+//        return new ResponseEntity<>(employeeService.getAllEmployees(), HttpStatus.OK);
+//    }
+
+
 
 }
