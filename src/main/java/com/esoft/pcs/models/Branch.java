@@ -1,13 +1,17 @@
 package com.esoft.pcs.models;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Branch {
+@DynamicUpdate
+public class Branch implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
     private String address;
@@ -22,7 +26,7 @@ public class Branch {
 
     private Double totalMonthlyPaddyLimitPerFarmer;
 
-    @OneToMany
+    @OneToMany()
     private List<Employee> employeeList;
 
     @OneToMany
@@ -33,6 +37,13 @@ public class Branch {
 
     @OneToMany
     private List<BranchOrder> branchOrderList;
+
+    public Branch() {
+    }
+
+    public Branch(Integer id) {
+        this.id = id;
+    }
 
     public Integer getId() {
         return id;

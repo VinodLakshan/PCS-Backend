@@ -14,6 +14,11 @@ public class ResponseDto {
         this.token = token;
     }
 
+    public ResponseDto(Object data, HttpStatus status) {
+        this.data = data;
+        this.status = status;
+    }
+
     public Object getData() {
         return data;
     }

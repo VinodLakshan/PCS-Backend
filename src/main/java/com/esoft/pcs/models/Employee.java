@@ -1,15 +1,16 @@
 package com.esoft.pcs.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = "userName")
 })
-public class Employee {
+public class Employee implements Cloneable, Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
@@ -18,10 +19,10 @@ public class Employee {
 
     private String password;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     private Role role;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     private Branch branch;
 
     public Employee() {
@@ -34,6 +35,11 @@ public class Employee {
         this.password = password;
         this.role = role;
         this.branch = branch;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     public Integer getId() {

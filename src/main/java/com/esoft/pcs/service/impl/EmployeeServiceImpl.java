@@ -1,9 +1,14 @@
 package com.esoft.pcs.service.impl;
 
 import com.esoft.pcs.dto.AuthEmployeeDto;
+import com.esoft.pcs.exception.UsernameAlreadyExistException;
+import com.esoft.pcs.models.Branch;
 import com.esoft.pcs.models.Employee;
+import com.esoft.pcs.models.Role;
 import com.esoft.pcs.repository.EmployeeRepository;
+import com.esoft.pcs.service.BranchService;
 import com.esoft.pcs.service.EmployeeService;
+import com.esoft.pcs.service.RoleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,22 +23,30 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService, UserDetailsService {
 
     private final EmployeeRepository employeeRepository;
+    private final RoleService roleService;
+    private final BranchService branchService;
     private final PasswordEncoder passwordEncoder;
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository, PasswordEncoder passwordEncoder) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, RoleService roleService, BranchService branchService, PasswordEncoder passwordEncoder) {
         this.employeeRepository = employeeRepository;
+        this.roleService = roleService;
+        this.branchService = branchService;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public Employee createEmployee(Employee employee) throws Exception {
+    public Employee createEmployee(Employee employee) throws UsernameAlreadyExistException, CloneNotSupportedException {
 
         if (!employeeRepository.existsByUserName(employee.getUserName())) {
-            employee.setPassword(passwordEncoder.encode(employee.getPassword()));
-            return employeeRepository.save(employee);
+            Employee emp = (Employee) employee.clone();
+            emp.setPassword(passwordEncoder.encode(emp.getPassword()));
+            Employee savedEmployee = employeeRepository.save(emp);
+            savedEmployee.setRole(roleService.getRoleById(savedEmployee.getRole().getId()));
+            savedEmployee.setBranch(branchService.getBranchById(savedEmployee.getBranch().getId()));
+            return savedEmployee;
 
         } else {
-            throw new Exception("Username is already taken");
+            throw new UsernameAlreadyExistException("Username is already taken");
         }
 
     }
