@@ -15,6 +15,7 @@ public class FarmerServiceImpl implements FarmerService {
     @Autowired
     private FarmerRepository farmerRepository;
 
+//  To Save a Single Farmer (Post Method)
     @Override
     public Long getCountOfFarmers() {
         return farmerRepository.count();
@@ -25,26 +26,39 @@ public class FarmerServiceImpl implements FarmerService {
         return farmerRepository.save(farmer);
     }
 
+//   To Fetch All Farmer Object from the Database (Get Method)
     @Override
     public List<Farmer> getAllFarmers() {
         return farmerRepository.findAll();
     }
 
+//   To Fetch All Farmer Object from the Database (Get Method)
     @Override
     public Farmer getFarmerById(Integer id) throws Exception {
         return farmerRepository.findById(id).
-                orElseThrow(() -> new Exception("Farmer not found for id=" + id));
+                orElseThrow(() -> new Exception("Farmer not found for id = " + id));
     }
 
+//    @Override
+//    public boolean deleteFarmer(Farmer farmer) {
+//        farmerRepository.delete(farmer);
+//        return true;
+//    }
+
     @Override
-    public boolean deleteFarmer(Farmer farmer) {
-        farmerRepository.delete(farmer);
-        return true;
+    public String deleteFarmer(Integer id){
+        farmerRepository.deleteById(id);
+        return "Farmer With ID" + id + " Has Been Removed Successfully";
     }
 
     @Override
     public Farmer updateFarmer(Farmer farmer) {
-        return farmerRepository.save(farmer);
+        Farmer existingFarmer = farmerRepository.findById(farmer.getId()).orElse(null);
+        existingFarmer.setName(farmer.getName());
+//        existingFarmer.setRegistrationNumber(farmer.getRegistrationNumber());
+        existingFarmer.setAddress(farmer.getAddress());
+        existingFarmer.setTelephoneNumber(farmer.getTelephoneNumber());
+        return farmerRepository.save(existingFarmer);
     }
 
 }

@@ -1,34 +1,30 @@
 package com.esoft.pcs.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.DynamicUpdate;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@DynamicUpdate
+//@Table(name = "FARMER_TBL")
 public class Farmer implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
-
-    private String name;
-
     private String registrationNumber;
-
+    private String name;
+    private String address;
+    private String telephoneNumber;
     private Double totalMonthlyPaddyAmount = 0.0;
 
     @OneToMany
     private List<PaddyPurchase> paddyPurchaseList;
 
     public Farmer() {
+
     }
 
-    public Farmer(Integer id) {
-        this.id = id;
+    public Farmer(Integer farmerId) {
     }
 
     public Integer getId() {
@@ -69,5 +65,21 @@ public class Farmer implements Serializable {
 
     public void setPaddyPurchaseList(List<PaddyPurchase> paddyPurchaseList) {
         this.paddyPurchaseList = paddyPurchaseList;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getTelephoneNumber() {
+        return telephoneNumber;
+    }
+
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
     }
 }
