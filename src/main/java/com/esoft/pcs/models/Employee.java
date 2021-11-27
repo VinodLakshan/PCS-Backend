@@ -4,10 +4,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "EMPLOYEE")
-//@Table(uniqueConstraints = {
-//        @UniqueConstraint(columnNames = "userName")
-//})
+//@Table(name = "EMPLOYEE")
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = "userName")
+})
 public class Employee implements Cloneable, Serializable {
 
     @Id
