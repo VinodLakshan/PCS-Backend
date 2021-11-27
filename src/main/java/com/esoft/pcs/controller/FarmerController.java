@@ -21,36 +21,33 @@ public class FarmerController {
     @Autowired
     private FarmerService farmerService;
 
-    @PostMapping
-    public ResponseEntity<?> createNewFarmer (@RequestBody Farmer farmer) {
-        return new ResponseEntity<>(new ResponseDto(farmerService.createFarmer(farmer), HttpStatus.OK), HttpStatus.OK);
+    @PostMapping()
+    public ResponseEntity<Farmer> createNewFarmer (@RequestBody Farmer farmer) {
+        return new ResponseEntity(new ResponseDto(farmerService.createFarmer(farmer), HttpStatus.OK), HttpStatus.OK);
     }
 
-    @GetMapping("/count")
-    public ResponseEntity<?> getFarmersCount() {
-        return new ResponseEntity<>(new ResponseDto(farmerService.getCountOfFarmers(), HttpStatus.OK), HttpStatus.OK);
-    }
-
-    @GetMapping
-    public ResponseEntity<?> getAllFarmers() {
+    @GetMapping()
+    public ResponseEntity<Farmer> getAllFarmers() {
         log.info("Retrieving all farmers");
-        return new ResponseEntity<>(new ResponseDto(farmerService.getAllFarmers(), HttpStatus.OK), HttpStatus.OK);
+        return new ResponseEntity(new ResponseDto(farmerService.getAllFarmers(), HttpStatus.OK), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getFarmerById(@PathVariable Integer id) throws Exception {
-        return new ResponseEntity<>(new ResponseDto(farmerService.getFarmerById(id), HttpStatus.OK), HttpStatus.OK);
+    public ResponseEntity<Farmer> getFarmerById(@PathVariable Integer id) throws Exception {
+        return new ResponseEntity(new ResponseDto(farmerService.getFarmerById(id), HttpStatus.OK), HttpStatus.OK);
     }
 
-    @PutMapping
-    public ResponseEntity<?> updateFarmer (@RequestBody Farmer farmer) {
-        return new ResponseEntity<>(new ResponseDto(farmerService.updateFarmer(farmer), HttpStatus.OK), HttpStatus.OK);
+    @PutMapping()
+    public ResponseEntity<Farmer> updateFarmer (@RequestBody Farmer farmer) {
+        return new ResponseEntity(new ResponseDto(farmerService.updateFarmer(farmer), HttpStatus.OK), HttpStatus.OK);
     }
 
-    @DeleteMapping
-    public ResponseEntity<?> deleteFarmer (@RequestBody Farmer farmer) {
-        return new ResponseEntity<>(new ResponseDto(farmerService.deleteFarmer(farmer), HttpStatus.OK), HttpStatus.OK);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Farmer> deleteFarmer (@PathVariable Integer id) {
+        return new ResponseEntity(new ResponseDto(farmerService.deleteFarmer(id), HttpStatus.OK), HttpStatus.OK);
     }
+
+
 
 
 }
