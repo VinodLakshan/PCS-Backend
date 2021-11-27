@@ -1,5 +1,6 @@
 package com.esoft.pcs.service.impl;
 
+import com.esoft.pcs.models.Branch;
 import com.esoft.pcs.models.PaddySale;
 
 import com.esoft.pcs.repository.PaddySaleRepository;
@@ -16,7 +17,10 @@ public class PaddySellingServiceImpl implements PaddySellingService {
 
 
     @Override
+
     public List<PaddySale> getAllSellingPaddy(Integer branchID) {
-        return paddySaleRepository.findAllById(branchID);
+      Branch branch = new Branch();
+      branch.setId(branchID);
+      return paddySaleRepository.findPaddySaleByBranch(branch);
     }
 }
