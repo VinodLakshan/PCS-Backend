@@ -28,7 +28,8 @@ public class EmployeeController {
 
 //    Zaid Starting
     @PostMapping()
-    public ResponseEntity<Employee> createNewEmployee (@RequestBody Employee employee) throws UsernameAlreadyExistException, CloneNotSupportedException {
+    public ResponseEntity<Employee> createNewEmployee (@RequestBody Employee employee)
+            throws UsernameAlreadyExistException, CloneNotSupportedException {
         return new ResponseEntity(new ResponseDto(employeeService.createEmployee(employee), HttpStatus.OK), HttpStatus.OK);
     }
 
