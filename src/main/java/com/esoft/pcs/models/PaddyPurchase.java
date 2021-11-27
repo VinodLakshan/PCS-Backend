@@ -13,16 +13,16 @@ public class PaddyPurchase {
 
     private Double weight;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Farmer farmer;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private PaddyPrice paddyPrice;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Branch branch;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Payment payment;
 
     public Integer getId() {

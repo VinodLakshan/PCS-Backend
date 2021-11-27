@@ -13,13 +13,13 @@ public class BranchOrder {
 
     private String date;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Branch fromBranch;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Branch toBranch;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Vehicle vehicle;
 
     public Integer getId() {
