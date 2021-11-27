@@ -39,7 +39,8 @@ public class EmployeeServiceImpl implements EmployeeService, UserDetailsService 
     }
 
     @Override
-    public Employee createEmployee(Employee employee) throws UsernameAlreadyExistException, CloneNotSupportedException {
+    public Employee createEmployee(Employee employee) throws UsernameAlreadyExistException, 
+            CloneNotSupportedException {
 
         if (!employeeRepository.existsByUserName(employee.getUserName())) {
             Employee emp = (Employee) employee.clone();
