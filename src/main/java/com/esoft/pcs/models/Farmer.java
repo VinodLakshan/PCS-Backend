@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "FARMER")
-public class Farmer implements Serializable {
+public class Farmer implements Serializable, Cloneable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -15,6 +15,9 @@ public class Farmer implements Serializable {
     private String telephoneNumber;
     private Double totalMonthlyPaddyAmount = 0.0;
     private String address;
+    private String nicNumber;
+
+
 
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -25,6 +28,14 @@ public class Farmer implements Serializable {
 
     public Farmer() {
 
+    }
+    public Farmer(String nicNumber) {
+        this.nicNumber = nicNumber;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     public Farmer(Branch branch) {
@@ -52,6 +63,14 @@ public class Farmer implements Serializable {
 
     public double getTotalMonthlyPaddyAmount() {
         return totalMonthlyPaddyAmount;
+    }
+
+    public String getNicNumber() {
+        return nicNumber;
+    }
+
+    public void setNicNumber(String nicNumber) {
+        this.nicNumber = nicNumber;
     }
 
     public void setTotalMonthlyPaddyAmount(Double totalMonthlyPaddyAmount) {
