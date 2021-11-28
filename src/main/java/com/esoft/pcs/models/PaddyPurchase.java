@@ -14,6 +14,8 @@ public class PaddyPurchase implements Serializable {
 
     private Double weight;
 
+    private Integer status;
+
     @ManyToOne(fetch = FetchType.EAGER)
     private Farmer farmer;
 
@@ -25,6 +27,7 @@ public class PaddyPurchase implements Serializable {
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Payment payment;
+
 
     public PaddyPurchase() {
     }
@@ -91,6 +94,25 @@ public class PaddyPurchase implements Serializable {
     }
 
     public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public PaddyPurchase(Integer id, String date, Double weight, Integer status, Farmer farmer, PaddyPrice paddyPrice, Branch branch, Payment payment) {
+        this.id = id;
+        this.date = date;
+        this.weight = weight;
+        this.status = status;
+        this.farmer = farmer;
+        this.paddyPrice = paddyPrice;
+        this.branch = branch;
         this.payment = payment;
     }
 }

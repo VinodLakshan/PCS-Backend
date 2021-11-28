@@ -42,10 +42,12 @@ public class FarmerController {
         return new ResponseEntity(new ResponseDto(farmerService.updateFarmer(farmer), HttpStatus.OK), HttpStatus.OK);
     }
 
-    @DeleteMapping()
-    public ResponseEntity<Farmer> deleteFarmer (@RequestBody Farmer farmer) {
-        return new ResponseEntity(new ResponseDto(farmerService.deleteFarmer(farmer.getId()), HttpStatus.OK), HttpStatus.OK);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Farmer> deleteFarmer (@PathVariable Integer id) {
+        return new ResponseEntity(new ResponseDto(farmerService.deleteFarmer(id), HttpStatus.OK), HttpStatus.OK);
     }
+
+
 
 
 }

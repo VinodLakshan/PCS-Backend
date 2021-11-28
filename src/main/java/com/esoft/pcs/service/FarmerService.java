@@ -10,8 +10,6 @@ public interface FarmerService {
 
     Farmer createFarmer(Farmer farmer);
 
-    List<Farmer> saveFarmers(List<Farmer> farmers);
-
     List<Farmer> getAllFarmers();
 
     Farmer getFarmerById(Integer id) throws Exception;

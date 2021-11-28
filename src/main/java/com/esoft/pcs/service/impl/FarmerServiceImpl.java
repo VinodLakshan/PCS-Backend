@@ -26,13 +26,6 @@ public class FarmerServiceImpl implements FarmerService {
         return farmerRepository.save(farmer);
     }
 
-//  To List the Saved Farmers  (Post Method)
-    @Override
-    public List<Farmer> saveFarmers(List<Farmer> farmers) {
-        return farmerRepository.saveAll(farmers);
-    }
-
-
 //   To Fetch All Farmer Object from the Database (Get Method)
     @Override
     public List<Farmer> getAllFarmers() {
@@ -55,14 +48,16 @@ public class FarmerServiceImpl implements FarmerService {
     @Override
     public String deleteFarmer(Integer id){
         farmerRepository.deleteById(id);
-        return "Farmer Removed!" + id;
+        return "Farmer With ID" + id + " Has Been Removed Successfully";
     }
 
     @Override
     public Farmer updateFarmer(Farmer farmer) {
         Farmer existingFarmer = farmerRepository.findById(farmer.getId()).orElse(null);
         existingFarmer.setName(farmer.getName());
-        existingFarmer.setRegistrationNumber(farmer.getRegistrationNumber());
+//        existingFarmer.setRegistrationNumber(farmer.getRegistrationNumber());
+        existingFarmer.setAddress(farmer.getAddress());
+        existingFarmer.setTelephoneNumber(farmer.getTelephoneNumber());
         return farmerRepository.save(existingFarmer);
     }
 
