@@ -15,6 +15,9 @@ public class Customer implements Serializable {
 
     private String Address;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Branch branch;
+
     @OneToMany
     private List<PaddySale> paddySaleList;
 
@@ -40,6 +43,14 @@ public class Customer implements Serializable {
 
     public void setAddress(String address) {
         Address = address;
+    }
+
+    public Branch getBranch() {
+        return branch;
+    }
+
+    public void setBranch(Branch branch) {
+        this.branch = branch;
     }
 
     public List<PaddySale> getPaddySaleList() {

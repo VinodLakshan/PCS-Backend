@@ -5,8 +5,8 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "FARMER")
-public class Farmer implements Serializable, Cloneable {
+//@Table(name = "FARMER")
+public class Farmer implements Serializable{
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -16,8 +16,6 @@ public class Farmer implements Serializable, Cloneable {
     private Double totalMonthlyPaddyAmount = 0.0;
     private String address;
     private String nicNumber;
-
-
 
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -31,11 +29,6 @@ public class Farmer implements Serializable, Cloneable {
     }
     public Farmer(String nicNumber) {
         this.nicNumber = nicNumber;
-    }
-
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
     }
 
     public Farmer(Branch branch) {
