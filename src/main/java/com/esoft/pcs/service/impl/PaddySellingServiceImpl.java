@@ -12,6 +12,7 @@ import java.util.List;
 
 @Service
 public class PaddySellingServiceImpl implements PaddySellingService {
+
   @Autowired
   private PaddySaleRepository paddySaleRepository;
 
