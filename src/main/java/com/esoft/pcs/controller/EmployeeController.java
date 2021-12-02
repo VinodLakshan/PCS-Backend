@@ -4,7 +4,6 @@ import com.esoft.pcs.dto.ErrorResponseDto;
 import com.esoft.pcs.dto.ResponseDto;
 import com.esoft.pcs.exception.UsernameAlreadyExistException;
 import com.esoft.pcs.models.Employee;
-import com.esoft.pcs.models.Farmer;
 import com.esoft.pcs.service.EmployeeService;
 import com.esoft.pcs.util.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -33,23 +32,23 @@ public class EmployeeController {
     }
 
     @GetMapping()
-    public ResponseEntity<Employee> getAllEmployee() {
+    public ResponseEntity<?> getAllEmployee() {
         log.info("Retrieving all Employees");
         return new ResponseEntity(new ResponseDto(employeeService.getAllEmployees(), HttpStatus.OK), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable Integer id) throws Exception {
+    public ResponseEntity<?> getEmployeeById(@PathVariable Integer id) throws Exception {
         return new ResponseEntity(new ResponseDto(employeeService.getEmployeeById(id), HttpStatus.OK), HttpStatus.OK);
     }
 
     @PutMapping()
-    public ResponseEntity<Employee> updateEmployee (@RequestBody Employee employee) {
+    public ResponseEntity<?> updateEmployee (@RequestBody Employee employee) {
         return new ResponseEntity(new ResponseDto(employeeService.updateEmp(employee), HttpStatus.OK), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Employee> deleteEmployee (@PathVariable Integer id) {
+    public ResponseEntity<?> deleteEmployee (@PathVariable Integer id) {
         return new ResponseEntity(new ResponseDto(employeeService.deleteEmployee(id), HttpStatus.OK), HttpStatus.OK);
     }
 
@@ -94,12 +93,6 @@ public class EmployeeController {
     public ResponseEntity<?> getEmployeeByUsername(@PathVariable String username){
         return new ResponseEntity<>(employeeService.getEmployeeByUserName(username), HttpStatus.OK);
     }
-
-//    @GetMapping
-//    public ResponseEntity<?> getAllEmployees() {
-//        log.info("Retrieving all employees");
-//        return new ResponseEntity<>(employeeService.getAllEmployees(), HttpStatus.OK);
-//    }
 
 
 

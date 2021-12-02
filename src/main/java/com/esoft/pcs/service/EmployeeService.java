@@ -16,13 +16,10 @@ public interface EmployeeService {
 
     Employee getEmployeeById(Integer id) throws Exception;
 
-    boolean deleteEmployee(Employee employeeDto);
-
     String deleteEmployee(Integer id);
 
     boolean isUserNameAlreadyExist(String userName);
 
     Employee updateEmp(Employee employee);
 
-    Employee updateEmployee(Employee employeeDto);
 }

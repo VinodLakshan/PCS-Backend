@@ -19,5 +19,5 @@ INSERT INTO `employee` (`id`, `name`, `password`, `user_name`, `branch_id`, `rol
 INSERT INTO `paddy_price` (`id`, `buying_price`, `date`, `selling_price`) VALUES ('1', '30', '2021-11-22', '35');
 INSERT INTO `paddy_price` (`id`, `buying_price`, `date`, `selling_price`) VALUES ('2', '31', '2021-11-26', '38');
 
-INSERT INTO `farmer` (`id`, `name`, `registration_number`, `total_monthly_paddy_amount`) VALUES ('1', 'Vinod Lakshan', '00000001', '20');
-INSERT INTO `farmer` (`id`, `name`, `registration_number`, `total_monthly_paddy_amount`) VALUES ('2', 'Testy Test', '00000002', '10');
+INSERT INTO `farmer` (`id`, `name`, `registration_number`, `address` , `telephone_number`, `total_monthly_paddy_amount`) VALUES ('1', 'Vinod Lakshan', '00000001', 'Galle', '077' ,  '20');
+INSERT INTO `farmer` (`id`, `name`, `registration_number`, `address` , `telephone_number`, `total_monthly_paddy_amount`) VALUES ('2', 'Testy Test', '00000002', 'Matara', '071' ,  '10');
