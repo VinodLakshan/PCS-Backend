@@ -54,7 +54,9 @@ public class FarmerController {
         return new ResponseEntity(new ResponseDto(farmerService.deleteFarmer(id), HttpStatus.OK), HttpStatus.OK);
     }
 
-
-
+    @GetMapping("/count")
+    public ResponseEntity<?> deleteFarmer () {
+        return new ResponseEntity(new ResponseDto(farmerService.getCountOfFarmers(), HttpStatus.OK), HttpStatus.OK);
+    }
 
 }
