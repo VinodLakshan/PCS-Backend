@@ -22,4 +22,9 @@ public class BranchController {
         return new ResponseEntity<>(new ResponseDto(branchService.getBranchById(id), HttpStatus.OK), HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity<?> getAllBranch()
+    {
+        return new ResponseEntity<>(new ResponseDto(branchService.getAllBranches(), HttpStatus.OK), HttpStatus.OK);
+    }
 }

@@ -5,6 +5,7 @@ import com.esoft.pcs.models.PaddySale;
 import java.util.List;
 
 public interface PaddySellingService {
-    List<PaddySale> getAllSellingPaddy(Integer branchID);
+//    List<PaddySale> getAllSellingPaddy(Integer branchID);
 
+    PaddySale PaddySaleSave(PaddySale paddySale);
 }
