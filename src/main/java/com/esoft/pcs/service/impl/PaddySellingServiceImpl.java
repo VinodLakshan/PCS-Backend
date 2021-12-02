@@ -25,10 +25,10 @@ public class PaddySellingServiceImpl implements PaddySellingService {
   private PaymentRepository paymentRepository;
 
 
-    @Override
-    public List<PaddySale> getAllSellingPaddy(Integer branchID) {
-        return paddySaleRepository.findAllById(branchID);
-    }
+//    @Override
+//    public List<PaddySale> getAllSellingPaddy(Integer branchID) {
+//        return paddySaleRepository.findAllById(branchID);
+//    }
 
   @Override
   public PaddySale PaddySaleSave(PaddySale paddySale)
