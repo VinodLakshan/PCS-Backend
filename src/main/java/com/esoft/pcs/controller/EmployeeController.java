@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController()
 @CrossOrigin(origins = "*")
 @RequestMapping("/employee")
@@ -26,10 +28,32 @@ public class EmployeeController {
     private JwtUtil jwtUtil;
 
 //    Zaid Starting
-    @PostMapping()
-    public ResponseEntity<Employee> createNewEmployee (@RequestBody Employee employee) throws UsernameAlreadyExistException, CloneNotSupportedException {
-        return new ResponseEntity(new ResponseDto(employeeService.createEmployee(employee), HttpStatus.OK), HttpStatus.OK);
-    }
+//    @GetMapping()
+//    public ResponseEntity<?> createEmployee(@RequestBody Employee employee) {
+//
+//    log.info("Employee is being registered");
+//    try {
+//        Employee createdEmployee = employeeService.createEmployee(employee);
+//        if (createdEmployee != null) {
+//            log.info("Employee registered");
+//            return new ResponseEntity<>(jwtUtil.authenticate(employee), HttpStatus.OK);
+//
+//        } else {
+//            log.error("Employee registration failed");
+//            return new ResponseEntity<>(new ErrorResponseDto(HttpStatus.EXPECTATION_FAILED, "Employee registration failed"),
+//                    HttpStatus.EXPECTATION_FAILED);
+//        }
+//
+//    } catch (UsernameAlreadyExistException e) {
+//
+//        log.error(e.getMessage());
+//        return new ResponseEntity<>(new ErrorResponseDto(HttpStatus.CONFLICT, e.getMessage()), HttpStatus.CONFLICT);
+//
+//    } catch (CloneNotSupportedException e) {
+//        log.error(e.getMessage());
+//        return new ResponseEntity<>(new ErrorResponseDto(HttpStatus.INTERNAL_SERVER_ERROR), HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
+//}
 
     @GetMapping()
     public ResponseEntity<?> getAllEmployee() {
@@ -40,6 +64,12 @@ public class EmployeeController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getEmployeeById(@PathVariable Integer id) throws Exception {
         return new ResponseEntity(new ResponseDto(employeeService.getEmployeeById(id), HttpStatus.OK), HttpStatus.OK);
+    }
+
+    @GetMapping("/getByBranchID/{id}")
+    public List<Employee> getAllEmployeeByBranchID(@PathVariable Integer id) throws Exception
+    {
+        return employeeService.getAllEmployee(id);
     }
 
     @PutMapping()

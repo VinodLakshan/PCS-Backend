@@ -67,6 +67,11 @@ public class EmployeeServiceImpl implements EmployeeService, UserDetailsService 
     }
 
     @Override
+    public boolean deleteEmployee(Employee employeeDto) {
+        return false;
+    }
+
+    @Override
     public String deleteEmployee(Integer id) {
         employeeRepository.deleteById(id);
         return "Employee with ID " + id + " Has Been Removed Successfully";
