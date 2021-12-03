@@ -24,5 +24,5 @@ public interface EmployeeService {
 
     Employee updateEmp(Employee employee);
 
-    Employee updateEmployee(Employee employeeDto);
+    List<Employee> getAllEmployee(Integer branchID);
 }

@@ -2,6 +2,7 @@ package com.esoft.pcs.service.impl;
 
 import com.esoft.pcs.dto.AuthEmployeeDto;
 import com.esoft.pcs.exception.UsernameAlreadyExistException;
+import com.esoft.pcs.models.Branch;
 import com.esoft.pcs.models.Employee;
 import com.esoft.pcs.repository.EmployeeRepository;
 import com.esoft.pcs.service.BranchService;
@@ -86,9 +87,7 @@ public class EmployeeServiceImpl implements EmployeeService, UserDetailsService 
     public Employee updateEmp(Employee employee) {
         Employee existingEmployee = employeeRepository.findById(employee.getId()).orElse(null);
         existingEmployee.setName(employee.getName());
-//        existingEmployee.setRegistrationNumber(employee.getRegistrationNumber());
         existingEmployee.setEmail(employee.getEmail());
-        existingEmployee.setUserId(employee.getUserId());
         existingEmployee.setBranch(employee.getBranch());
         existingEmployee.setPassword(passwordEncoder.encode(existingEmployee.getPassword()));
         existingEmployee.setRole(employee.getRole());
@@ -105,5 +104,12 @@ public class EmployeeServiceImpl implements EmployeeService, UserDetailsService 
         log.info("Employee Found");
 
         return new AuthEmployeeDto(employee);
+    }
+
+    @Override
+    public List<Employee> getAllEmployee(Integer branchID) {
+        Branch branch = new Branch();
+        branch.setId(branchID);
+        return employeeRepository.findEmployeeByBranch(branch);
     }
 }
