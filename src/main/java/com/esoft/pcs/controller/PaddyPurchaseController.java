@@ -12,7 +12,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/paddyPurchase")
 @Slf4j
-public class PaddyPurchaseController {
+public class PaddyPurchaseController
+{
     @Autowired
     private PaddyPurchaseService paddyPurchaseService;
     @GetMapping("/getByBranchID/{ID}")
