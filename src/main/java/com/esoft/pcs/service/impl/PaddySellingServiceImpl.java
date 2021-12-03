@@ -1,10 +1,7 @@
 package com.esoft.pcs.service.impl;
 
-import com.esoft.pcs.models.Branch;
-import com.esoft.pcs.models.Customer;
-import com.esoft.pcs.models.PaddySale;
+import com.esoft.pcs.models.*;
 
-import com.esoft.pcs.models.Payment;
 import com.esoft.pcs.repository.CustomerRepository;
 import com.esoft.pcs.repository.PaddySaleRepository;
 import com.esoft.pcs.repository.PaymentRepository;
@@ -42,5 +39,13 @@ public class PaddySellingServiceImpl implements PaddySellingService {
     paddySale.setPayment(savedPayment);
 
     return paddySaleRepository.save(paddySale);
+  }
+  @Override
+  public PaddySale updatePaddySale(PaddySale paddySale)
+  {
+    PaddySale pendingSale = paddySaleRepository.findById(paddySale.getId()).orElse(null);
+    pendingSale.setStatus(paddySale.getStatus());
+
+    return paddySaleRepository.save(pendingSale);
   }
 }

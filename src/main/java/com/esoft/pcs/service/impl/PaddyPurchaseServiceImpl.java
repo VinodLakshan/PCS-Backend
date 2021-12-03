@@ -22,4 +22,18 @@ public class PaddyPurchaseServiceImpl implements PaddyPurchaseService {
         branch.setId(branchID);
         return paddyRepository.findAllByBranchOrderByIdDesc(branch);
     }
+
+    @Override
+    public PaddyPurchase PaddyPurchaseSave(PaddyPurchase paddyPurchase) {
+        return null;
+    }
+
+    @Override
+    public PaddyPurchase updatePaddyPurchase(PaddyPurchase paddyPurchase)
+    {
+        PaddyPurchase pendingPurchase = paddyRepository.findById(paddyPurchase.getId()).orElse(null);
+        pendingPurchase.setStatus(paddyPurchase.getStatus());
+
+        return paddyRepository.save(pendingPurchase);
+    }
 }
