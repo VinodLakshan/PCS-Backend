@@ -74,6 +74,13 @@ public class EmployeeServiceImpl implements EmployeeService, UserDetailsService 
     }
 
     @Override
+    public List<Employee> getAllEmployee(Integer branchID) {
+        Branch branch = new Branch();
+        branch.setId(branchID);
+        return employeeRepository.findEmployeeByBranch(branch);
+    }
+
+    @Override
     public boolean deleteEmployee(Employee employeeDto) {
         return false;
     }

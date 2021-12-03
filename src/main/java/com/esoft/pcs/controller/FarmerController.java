@@ -3,6 +3,7 @@ package com.esoft.pcs.controller;
 import com.esoft.pcs.dto.ResponseDto;
 import com.esoft.pcs.models.Branch;
 import com.esoft.pcs.models.Farmer;
+import com.esoft.pcs.models.PaddySale;
 import com.esoft.pcs.service.FarmerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,12 @@ public class FarmerController {
         return new ResponseEntity(new ResponseDto(farmerService.getFarmerById(id), HttpStatus.OK), HttpStatus.OK);
     }
 
+    @GetMapping("/getByBranchID/{id}")
+    public List<Farmer> getAllFarmerByBranchID(@PathVariable Integer id) throws Exception
+    {
+        return farmerService.getAllFarmer(id);
+    }
+
     @PutMapping()
     public ResponseEntity<Farmer> updateFarmer (@RequestBody Farmer farmer) {
         return new ResponseEntity(new ResponseDto(farmerService.updateFarmer(farmer), HttpStatus.OK), HttpStatus.OK);
@@ -47,7 +54,9 @@ public class FarmerController {
         return new ResponseEntity(new ResponseDto(farmerService.deleteFarmer(id), HttpStatus.OK), HttpStatus.OK);
     }
 
-
-
+    @GetMapping("/count")
+    public ResponseEntity<?> deleteFarmer () {
+        return new ResponseEntity(new ResponseDto(farmerService.getCountOfFarmers(), HttpStatus.OK), HttpStatus.OK);
+    }
 
 }

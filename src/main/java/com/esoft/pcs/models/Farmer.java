@@ -5,23 +5,30 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-//@Table(name = "FARMER_TBL")
+@Table(name = "FARMER")
 public class Farmer implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
-    private String registrationNumber;
     private String name;
-    private String address;
     private String telephoneNumber;
     private Double totalMonthlyPaddyAmount = 0.0;
+    private String address;
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Branch branch;
 
     @OneToMany
     private List<PaddyPurchase> paddyPurchaseList;
 
     public Farmer() {
 
+    }
+
+    public Farmer(Branch branch) {
+        this.branch = branch;
     }
 
     public Farmer(Integer farmerId) {
@@ -43,14 +50,6 @@ public class Farmer implements Serializable {
         this.name = name;
     }
 
-    public String getRegistrationNumber() {
-        return registrationNumber;
-    }
-
-    public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
-    }
-
     public double getTotalMonthlyPaddyAmount() {
         return totalMonthlyPaddyAmount;
     }
@@ -67,12 +66,12 @@ public class Farmer implements Serializable {
         this.paddyPurchaseList = paddyPurchaseList;
     }
 
-    public String getAddress() {
-        return address;
+    public Branch getBranch() {
+        return branch;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setBranch(Branch branch) {
+        this.branch = branch;
     }
 
     public String getTelephoneNumber() {
@@ -82,4 +81,14 @@ public class Farmer implements Serializable {
     public void setTelephoneNumber(String telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
     }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }
+
+

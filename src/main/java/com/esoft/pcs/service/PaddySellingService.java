@@ -7,4 +7,5 @@ import java.util.List;
 public interface PaddySellingService {
     List<PaddySale> getAllSellingPaddy(Integer branchID);
 
+    PaddySale PaddySaleSave(PaddySale paddySale);
 }
