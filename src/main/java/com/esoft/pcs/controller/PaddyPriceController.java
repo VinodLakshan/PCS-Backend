@@ -23,6 +23,7 @@ public class PaddyPriceController
     @GetMapping("/TodayPaddyPriceGet")
     public ResponseEntity<PaddyPrice> TodayPaddyPriceGet(HttpServletRequest request) throws Exception
     {
+        log.info("Retrieving Today Paddy Prices");
         return new ResponseEntity<>(paddyPriceService.TodayPaddyPrice(), HttpStatus.OK);
     }
 

@@ -5,17 +5,16 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "FARMER")
 public class Farmer implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
+    private String registrationNumber;
     private String name;
+    private String address;
     private String telephoneNumber;
     private Double totalMonthlyPaddyAmount = 0.0;
-    private String address;
-
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Branch branch;
@@ -32,6 +31,7 @@ public class Farmer implements Serializable {
     }
 
     public Farmer(Integer farmerId) {
+        this.id = farmerId;
     }
 
     public Integer getId() {
@@ -48,6 +48,14 @@ public class Farmer implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getRegistrationNumber() {
+        return registrationNumber;
+    }
+
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
     }
 
     public double getTotalMonthlyPaddyAmount() {
