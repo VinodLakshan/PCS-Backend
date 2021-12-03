@@ -67,6 +67,12 @@ public class EmployeeController {
         return new ResponseEntity(new ResponseDto(employeeService.getEmployeeById(id), HttpStatus.OK), HttpStatus.OK);
     }
 
+    @GetMapping("/{username}")
+    @PreAuthorize("hasAuthority('Admin')")
+    public ResponseEntity<Employee> getEmployeeByUsername(@PathVariable String username){
+        return new ResponseEntity<>(employeeService.getEmployeeByUserName(username), HttpStatus.OK);
+    }
+
     @GetMapping("/getByBranchID/{id}")
     public List<Employee> getAllEmployeeByBranchID(@PathVariable Integer id) throws Exception
     {
@@ -119,11 +125,7 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping("/{username}")
-    @PreAuthorize("hasAuthority('Admin')")
-    public ResponseEntity<?> getEmployeeByUsername(@PathVariable String username){
-        return new ResponseEntity<>(employeeService.getEmployeeByUserName(username), HttpStatus.OK);
-    }
+
 
 //    @GetMapping
 //    public ResponseEntity<?> getAllEmployees() {
