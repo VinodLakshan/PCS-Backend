@@ -57,7 +57,4 @@ public class FarmerController {
         return new ResponseEntity(new ResponseDto(farmerService.deleteFarmer(id), HttpStatus.OK), HttpStatus.OK);
     }
 
-
-
-
 }
