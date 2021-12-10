@@ -33,7 +33,7 @@ public class PaddyController {
         Payment payment = new Payment(purchasePaddyDto.getDate(), purchasePaddyDto.getPaymentAmount(), "COM Bank", "Pending");
 
         PaddyPurchase paddyPurchase = new PaddyPurchase(purchasePaddyDto.getDate(), purchasePaddyDto.getWeight(),
-                farmer, paddyPrice, branch, payment);
+                farmer, paddyPrice, branch, payment, 0);
         return new ResponseEntity<>(new ResponseDto(paddyService.savePurchase(paddyPurchase), HttpStatus.OK), HttpStatus.OK);
     }
 
