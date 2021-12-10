@@ -38,6 +38,7 @@ public class PaddyPurchaseServiceImpl implements PaddyPurchaseService {
     {
         PaddyPurchase pendingPurchase = paddyRepository.findById(paddyPurchase.getId()).orElse(null);
         pendingPurchase.setStatus(paddyPurchase.getStatus());
+        pendingPurchase.getPayment().setStatus("Completed");
         Optional<Branch> dbBranch = branchRepository.findById(pendingPurchase.getBranch().getId());
         dbBranch.get().setStock(dbBranch.get().getStock()+pendingPurchase.getWeight());
         branchRepository.save(dbBranch.get());
