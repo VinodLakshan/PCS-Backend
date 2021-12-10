@@ -5,6 +5,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
 @DynamicUpdate
@@ -18,8 +19,15 @@ public class PaddyTransfer implements Serializable
     @ManyToOne(fetch = FetchType.EAGER)
     private Branch branch;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Branch ToBranch;
+
     private Double stock;
 
+    private Integer status;
 
-//    private Vehicle vehicle;
+    private LocalDate date;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Vehicle vehicle;
 }

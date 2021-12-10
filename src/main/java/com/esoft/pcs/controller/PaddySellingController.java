@@ -16,7 +16,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/paddySelling")
 @Slf4j
-public class PaddySellingController {
+public class PaddySellingController
+{
     @Autowired
     private PaddySellingService paddySellingService;
 

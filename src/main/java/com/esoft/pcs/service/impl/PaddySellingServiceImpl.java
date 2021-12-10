@@ -12,6 +12,7 @@ import com.esoft.pcs.service.PaddySellingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -38,8 +39,12 @@ public class PaddySellingServiceImpl implements PaddySellingService {
     Customer savedCustomer = customerRepository.save(paddySale.getCustomer());
     paddySale.setCustomer(savedCustomer);
 
+    paddySale.getPayment().setDate(LocalDate.now().toString());
     Payment savedPayment = paymentRepository.save(paddySale.getPayment());
     paddySale.setPayment(savedPayment);
+
+    paddySale.setDate(LocalDate.now().toString());
+    paddySale.setStatus(0);
 
     return paddySaleRepository.save(paddySale);
   }
