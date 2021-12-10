@@ -1,6 +1,8 @@
 package com.esoft.pcs.controller;
 
 import com.esoft.pcs.dto.ResponseDto;
+import com.esoft.pcs.dto.ResponseDto;
+import com.esoft.pcs.models.Employee;
 import com.esoft.pcs.models.PaddyPurchase;
 import com.esoft.pcs.models.PaddySale;
 import com.esoft.pcs.service.PaddySellingService;
@@ -31,5 +33,9 @@ public class PaddySellingController
     public ResponseEntity<?> PaddySaleSave(@RequestBody PaddySale paddySale) throws Exception
     {
         return new ResponseEntity<>(new ResponseDto(paddySellingService.PaddySaleSave(paddySale), HttpStatus.OK), HttpStatus.OK);
+    }
+    @PutMapping()
+    public ResponseEntity<PaddySale> updatePaddySale (@RequestBody PaddySale paddySale) {
+        return new ResponseEntity(new ResponseDto( paddySellingService.updatePaddySale(paddySale) , HttpStatus.OK), HttpStatus.OK);
     }
 }

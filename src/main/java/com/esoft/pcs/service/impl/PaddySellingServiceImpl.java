@@ -1,10 +1,8 @@
 package com.esoft.pcs.service.impl;
 
-import com.esoft.pcs.models.Branch;
-import com.esoft.pcs.models.Customer;
-import com.esoft.pcs.models.PaddySale;
+import com.esoft.pcs.models.*;
 
-import com.esoft.pcs.models.Payment;
+import com.esoft.pcs.repository.BranchRepository;
 import com.esoft.pcs.repository.CustomerRepository;
 import com.esoft.pcs.repository.PaddySaleRepository;
 import com.esoft.pcs.repository.PaymentRepository;
@@ -14,12 +12,16 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PaddySellingServiceImpl implements PaddySellingService {
 
   @Autowired
   private PaddySaleRepository paddySaleRepository;
+
+  @Autowired
+  private BranchRepository branchRepository;
 
   @Autowired
   private CustomerRepository customerRepository;
@@ -47,5 +49,15 @@ public class PaddySellingServiceImpl implements PaddySellingService {
     paddySale.setStatus(0);
 
     return paddySaleRepository.save(paddySale);
+  }
+  @Override
+  public PaddySale updatePaddySale(PaddySale paddySale)
+  {
+    PaddySale pendingSale = paddySaleRepository.findById(paddySale.getId()).orElse(null);
+    pendingSale.setStatus(paddySale.getStatus());
+    Optional<Branch> dbBranch = branchRepository.findById(pendingSale.getBranch().getId());
+    dbBranch.get().setStock(dbBranch.get().getStock()-pendingSale.getWeight());
+    branchRepository.save(dbBranch.get());
+    return paddySaleRepository.save(pendingSale);
   }
 }
