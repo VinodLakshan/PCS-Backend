@@ -48,7 +48,7 @@ public class PaddyServiceTest {
         branch.setStock(20.00);
         Payment payment = new Payment("2021-12-05", 2500.00, "COM BANK", "Pending");
 
-        PaddyPurchase paddyPurchase = new PaddyPurchase("2012-12-05", 12.00, farmer, paddyPrice, branch, payment);
+        PaddyPurchase paddyPurchase = new PaddyPurchase("2012-12-05", 12.00, farmer, paddyPrice, branch, payment, 0);
         Mockito.when(paddyRepository.save(paddyPurchase)).thenReturn(paddyPurchase);
         Mockito.when(branchRepository.findById(1)).thenReturn(java.util.Optional.of(branch));
         Mockito.when(branchRepository.save(any(Branch.class))).thenReturn(branch);
