@@ -1,8 +1,6 @@
 package com.esoft.pcs.service;
 
 import com.esoft.pcs.models.Customer;
-import com.esoft.pcs.models.Farmer;
-
 import java.util.List;
 
 public interface CustomerService {
@@ -19,7 +17,7 @@ public interface CustomerService {
 
     Customer updateCustomer(Customer customer);
 
-
+    Customer createNewCustomer(Customer customer);
 
 
 

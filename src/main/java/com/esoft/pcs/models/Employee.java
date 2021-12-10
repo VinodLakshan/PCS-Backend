@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-//@Table(name = "EMPLOYEE")
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = "userName")
 })
@@ -13,7 +12,6 @@ public class Employee implements Cloneable, Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
-    private String userId;
     private String name;
     private String userName;
     private String email;
@@ -63,14 +61,6 @@ public class Employee implements Cloneable, Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getPassword() {

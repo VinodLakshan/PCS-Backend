@@ -1,6 +1,5 @@
 # Server properties
 server:
-  port: 9091
   servlet:
     context-path: /pcs
 
@@ -10,7 +9,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     url: jdbc:mysql://localhost:3306/pcsdb?createDatabaseIfNotExist=true
-    password: password
+    password:
   jpa:
     hibernate:
       ddl-auto: update

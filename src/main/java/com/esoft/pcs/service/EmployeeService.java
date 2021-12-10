@@ -16,8 +16,6 @@ public interface EmployeeService {
 
     Employee getEmployeeById(Integer id) throws Exception;
 
-    List<Employee> getAllEmployee(Integer branchID);
-
     boolean deleteEmployee(Employee employeeDto);
 
     String deleteEmployee(Integer id);
@@ -26,5 +24,5 @@ public interface EmployeeService {
 
     Employee updateEmp(Employee employee);
 
-    Employee updateEmployee(Employee employeeDto);
+    List<Employee> getAllEmployee(Integer branchID);
 }
