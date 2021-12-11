@@ -5,6 +5,7 @@ import com.esoft.pcs.models.Customer;
 import com.esoft.pcs.models.Farmer;
 import com.esoft.pcs.service.CustomerService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class CustomerController {
 
+    @Autowired
     private CustomerService customerService;
 
     public CustomerController(CustomerService customerService){this.customerService= customerService;}
@@ -27,6 +29,12 @@ public class CustomerController {
     @GetMapping()
     public ResponseEntity<Farmer> getAllCustomers() {
         return new ResponseEntity(new ResponseDto(customerService.getAllCustomers(), HttpStatus.OK), HttpStatus.OK);
+    }
+
+    @GetMapping("/Count")
+    public ResponseEntity<?> GetCustomerCount()
+    {
+        return new ResponseEntity<>(new ResponseDto(customerService.GetCustomerTotalCount(), HttpStatus.OK), HttpStatus.OK);
     }
 
 }

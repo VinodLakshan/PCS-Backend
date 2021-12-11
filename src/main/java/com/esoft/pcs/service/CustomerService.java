@@ -9,4 +9,6 @@ public interface CustomerService {
     Customer createNewCustomer(Customer customer);
 
     List<Customer> getAllCustomers();
+
+    long GetCustomerTotalCount();
 }
