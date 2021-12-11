@@ -32,13 +32,14 @@ public class PaddyPurchase implements Serializable {
     public PaddyPurchase() {
     }
 
-    public PaddyPurchase(String date, Double weight, Farmer farmer, PaddyPrice paddyPrice, Branch branch, Payment payment) {
+    public PaddyPurchase(String date, Double weight, Farmer farmer, PaddyPrice paddyPrice, Branch branch, Payment payment, Integer status) {
         this.date = date;
         this.weight = weight;
         this.farmer = farmer;
         this.paddyPrice = paddyPrice;
         this.branch = branch;
         this.payment = payment;
+        this.status = status;
     }
 
     public Integer getId() {
