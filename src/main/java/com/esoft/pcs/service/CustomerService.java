@@ -10,5 +10,19 @@ public interface CustomerService {
 
     List<Customer> getAllCustomers();
 
+    List<Customer> getAllCustomer(Integer branchID);
+
+    Customer getCustomerById(Integer id) throws Exception;
+
+    String deleteCustomer(Integer id);
+
+    Customer updateCustomer(Customer customer);
+
+    Customer createNewCustomer(Customer customer);
+
+
+
+
+
     long GetCustomerTotalCount();
 }

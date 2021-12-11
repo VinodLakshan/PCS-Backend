@@ -24,6 +24,7 @@ public class FarmerController {
 
     @PostMapping()
     public ResponseEntity<Farmer> createNewFarmer (@RequestBody Farmer farmer) {
+        log.info("New Farmer Has been Created");
         return new ResponseEntity(new ResponseDto(farmerService.createFarmer(farmer), HttpStatus.OK), HttpStatus.OK);
     }
 
@@ -46,11 +47,13 @@ public class FarmerController {
 
     @PutMapping()
     public ResponseEntity<Farmer> updateFarmer (@RequestBody Farmer farmer) {
+        log.info("A Farmer has been Updated");
         return new ResponseEntity(new ResponseDto(farmerService.updateFarmer(farmer), HttpStatus.OK), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Farmer> deleteFarmer (@PathVariable Integer id) {
+        log.info("A Farmer has been Deleted");
         return new ResponseEntity(new ResponseDto(farmerService.deleteFarmer(id), HttpStatus.OK), HttpStatus.OK);
     }
 
