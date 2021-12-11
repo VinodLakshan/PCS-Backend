@@ -1,9 +1,13 @@
 package com.esoft.pcs.service.impl;
 
 import com.esoft.pcs.dto.AuthEmployeeDto;
+import com.esoft.pcs.exception.UsernameAlreadyExistException;
+import com.esoft.pcs.models.Branch;
 import com.esoft.pcs.models.Employee;
 import com.esoft.pcs.repository.EmployeeRepository;
+import com.esoft.pcs.service.BranchService;
 import com.esoft.pcs.service.EmployeeService;
+import com.esoft.pcs.service.RoleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,22 +22,31 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService, UserDetailsService {
 
     private final EmployeeRepository employeeRepository;
+    private final RoleService roleService;
+    private final BranchService branchService;
     private final PasswordEncoder passwordEncoder;
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository, PasswordEncoder passwordEncoder) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, RoleService roleService, BranchService branchService, PasswordEncoder passwordEncoder) {
         this.employeeRepository = employeeRepository;
+        this.roleService = roleService;
+        this.branchService = branchService;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public Employee createEmployee(Employee employee) throws Exception {
+    public Employee createEmployee(Employee employee) throws UsernameAlreadyExistException,
+            CloneNotSupportedException {
 
         if (!employeeRepository.existsByUserName(employee.getUserName())) {
-            employee.setPassword(passwordEncoder.encode(employee.getPassword()));
-            return employeeRepository.save(employee);
+            Employee emp = (Employee) employee.clone();
+            emp.setPassword(passwordEncoder.encode(emp.getPassword()));
+            Employee savedEmployee = employeeRepository.save(emp);
+            savedEmployee.setRole(roleService.getRoleById(savedEmployee.getRole().getId()));
+            savedEmployee.setBranch(branchService.getBranchById(savedEmployee.getBranch().getId()));
+            return savedEmployee;
 
         } else {
-            throw new Exception("Username is already taken");
+            throw new UsernameAlreadyExistException("Username is already taken");
         }
 
     }
@@ -49,9 +62,20 @@ public class EmployeeServiceImpl implements EmployeeService, UserDetailsService 
     }
 
     @Override
-    public boolean deleteEmployee(Employee employee) {
-        employeeRepository.delete(employee);
-        return true;
+    public Employee getEmployeeById(Integer id) throws Exception {
+        return employeeRepository.findById(id).
+                orElseThrow(() -> new Exception("Employee not found for id = " + id));
+    }
+
+    @Override
+    public boolean deleteEmployee(Employee employeeDto) {
+        return false;
+    }
+
+    @Override
+    public String deleteEmployee(Integer id) {
+        employeeRepository.deleteById(id);
+        return "Employee with ID " + id + " Has Been Removed Successfully";
     }
 
     @Override
@@ -60,8 +84,14 @@ public class EmployeeServiceImpl implements EmployeeService, UserDetailsService 
     }
 
     @Override
-    public Employee updateEmployee(Employee employee) {
-        return null;
+    public Employee updateEmp(Employee employee) {
+        Employee existingEmployee = employeeRepository.findById(employee.getId()).orElse(null);
+        existingEmployee.setName(employee.getName());
+        existingEmployee.setEmail(employee.getEmail());
+        existingEmployee.setBranch(employee.getBranch());
+        existingEmployee.setPassword(passwordEncoder.encode(existingEmployee.getPassword()));
+        existingEmployee.setRole(employee.getRole());
+        return employeeRepository.save(existingEmployee);
     }
 
     @Override
@@ -76,4 +106,10 @@ public class EmployeeServiceImpl implements EmployeeService, UserDetailsService 
         return new AuthEmployeeDto(employee);
     }
 
+    @Override
+    public List<Employee> getAllEmployee(Integer branchID) {
+        Branch branch = new Branch();
+        branch.setId(branchID);
+        return employeeRepository.findEmployeeByBranch(branch);
+    }
 }

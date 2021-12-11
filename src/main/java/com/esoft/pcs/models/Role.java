@@ -1,18 +1,19 @@
 package com.esoft.pcs.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Role {
+public class Role implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
     private String roleName;
 
-    @OneToMany
+    @OneToMany()
     private List<Employee> employees;
 
     public Integer getId() {

@@ -20,4 +20,9 @@ public class BranchServiceImpl implements BranchService {
     public List<Branch> getAllBranches() {
         return branchRepository.findAll();
     }
+
+    @Override
+    public Branch getBranchById(Integer id) {
+        return branchRepository.findById(id).orElse(null);
+    }
 }

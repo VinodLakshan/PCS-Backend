@@ -1,12 +1,16 @@
 package com.esoft.pcs.models;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @Entity
-public class PaddyPrice {
+@DynamicUpdate
+public class PaddyPrice implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -17,6 +21,13 @@ public class PaddyPrice {
     private Double buyingPrice;
 
     private Double sellingPrice;
+
+    public PaddyPrice() {
+    }
+
+    public PaddyPrice(Integer id) {
+        this.id = id;
+    }
 
     public Integer getId() {
         return id;

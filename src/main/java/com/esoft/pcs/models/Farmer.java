@@ -1,23 +1,44 @@
 package com.esoft.pcs.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Farmer {
+public class Farmer implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
-
-    private String name;
-
     private String registrationNumber;
+    private String name;
+    private String address;
+    private String telephoneNumber;
+    private Double totalMonthlyPaddyAmount = 0.0;
+    private String address;
+    private String nicNumber;
 
-    private Double totalMonthlyPaddyAmount;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Branch branch;
 
     @OneToMany
     private List<PaddyPurchase> paddyPurchaseList;
+
+    public Farmer() {
+
+    }
+    public Farmer(String nicNumber) {
+        this.nicNumber = nicNumber;
+    }
+
+    public Farmer(Branch branch) {
+        this.branch = branch;
+    }
+
+    public Farmer(Integer farmerId) {
+        this.id = farmerId;
+    }
 
     public Integer getId() {
         return id;
@@ -47,6 +68,14 @@ public class Farmer {
         return totalMonthlyPaddyAmount;
     }
 
+    public String getNicNumber() {
+        return nicNumber;
+    }
+
+    public void setNicNumber(String nicNumber) {
+        this.nicNumber = nicNumber;
+    }
+
     public void setTotalMonthlyPaddyAmount(Double totalMonthlyPaddyAmount) {
         this.totalMonthlyPaddyAmount = totalMonthlyPaddyAmount;
     }
@@ -58,4 +87,30 @@ public class Farmer {
     public void setPaddyPurchaseList(List<PaddyPurchase> paddyPurchaseList) {
         this.paddyPurchaseList = paddyPurchaseList;
     }
+
+    public Branch getBranch() {
+        return branch;
+    }
+
+    public void setBranch(Branch branch) {
+        this.branch = branch;
+    }
+
+    public String getTelephoneNumber() {
+        return telephoneNumber;
+    }
+
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }
+
+

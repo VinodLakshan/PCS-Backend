@@ -1,17 +1,20 @@
 package com.esoft.pcs.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class PaddyPurchase {
+public class PaddyPurchase implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
     private String date;
 
     private Double weight;
+
+    private Integer status;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Farmer farmer;
@@ -22,8 +25,22 @@ public class PaddyPurchase {
     @ManyToOne(fetch = FetchType.EAGER)
     private Branch branch;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Payment payment;
+
+
+    public PaddyPurchase() {
+    }
+
+    public PaddyPurchase(String date, Double weight, Farmer farmer, PaddyPrice paddyPrice, Branch branch, Payment payment, Integer status) {
+        this.date = date;
+        this.weight = weight;
+        this.farmer = farmer;
+        this.paddyPrice = paddyPrice;
+        this.branch = branch;
+        this.payment = payment;
+        this.status = status;
+    }
 
     public Integer getId() {
         return id;
@@ -78,6 +95,25 @@ public class PaddyPurchase {
     }
 
     public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public PaddyPurchase(Integer id, String date, Double weight, Integer status, Farmer farmer, PaddyPrice paddyPrice, Branch branch, Payment payment) {
+        this.id = id;
+        this.date = date;
+        this.weight = weight;
+        this.status = status;
+        this.farmer = farmer;
+        this.paddyPrice = paddyPrice;
+        this.branch = branch;
         this.payment = payment;
     }
 }

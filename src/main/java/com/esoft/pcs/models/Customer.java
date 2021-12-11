@@ -1,10 +1,11 @@
 package com.esoft.pcs.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Customer {
+public class Customer implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -13,6 +14,9 @@ public class Customer {
     private String name;
 
     private String Address;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Branch branch;
 
     @OneToMany
     private List<PaddySale> paddySaleList;
@@ -39,6 +43,14 @@ public class Customer {
 
     public void setAddress(String address) {
         Address = address;
+    }
+
+    public Branch getBranch() {
+        return branch;
+    }
+
+    public void setBranch(Branch branch) {
+        this.branch = branch;
     }
 
     public List<PaddySale> getPaddySaleList() {
