@@ -10,15 +10,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CustomerServiceImpl implements CustomerService {
+public class CustomerServiceImpl implements CustomerService
+{
 
-    @Autowired
-    private final CustomerRepository customerRepository;
     @Autowired
     private CustomerRepository customerRepository;
 
     @Override
-    public Customer createCustomer(Customer customer) {
+    public Customer createNewCustomer(Customer customer) {
         return customerRepository.save(customer);
     }
 
@@ -54,16 +53,6 @@ public class CustomerServiceImpl implements CustomerService {
 //      existingCustomer.setName(customer.getName());
         return customerRepository.save(existingCustomer);
 
-    }
-
-    @Override
-    public Customer createNewCustomer(Customer customer) {
-        return this.customerRepository.save(customer);
-    }
-
-    @Override
-    public List<Customer> getAllCustomers() {
-        return this.customerRepository.findAll();
     }
 
     @Override

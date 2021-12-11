@@ -18,11 +18,5 @@ public interface CustomerService {
 
     Customer updateCustomer(Customer customer);
 
-    Customer createNewCustomer(Customer customer);
-
-
-
-
-
     long GetCustomerTotalCount();
 }
