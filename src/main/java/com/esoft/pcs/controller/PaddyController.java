@@ -38,7 +38,7 @@ public class PaddyController {
     }
 
     @GetMapping("/{branchId}")
-    @PreAuthorize("hasAuthority('Collection_Officer')")
+//    @PreAuthorize("hasAuthority('Collection_Officer')")
     public ResponseEntity<?> getAllPaddyPurchasesByBranch(@PathVariable Integer branchId){
 
         log.info("Retrieving Paddy Purchases for branch id: " + branchId);

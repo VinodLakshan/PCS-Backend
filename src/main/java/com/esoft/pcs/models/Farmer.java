@@ -15,7 +15,6 @@ public class Farmer implements Serializable {
     private String address;
     private String telephoneNumber;
     private Double totalMonthlyPaddyAmount = 0.0;
-    private String address;
     private String nicNumber;
 
 
